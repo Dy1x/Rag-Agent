@@ -1,0 +1,426 @@
+{
+  "single_turn_cases": [
+    {
+      "id": "single_001",
+      "category": "tool_selection",
+      "query": "使用MySQL数据库工具查询用户1001的基本信息。",
+      "required_tools": ["get_user_profile_from_db"],
+      "expected_arguments": {
+        "get_user_profile_from_db": {"user_id": "1001"}
+      }
+    },
+    {
+      "id": "single_002",
+      "category": "tool_selection",
+      "query": "使用MySQL数据库工具查询用户1002绑定的设备。",
+      "required_tools": ["get_user_devices_from_db"],
+      "expected_arguments": {
+        "get_user_devices_from_db": {"user_id": "1002"}
+      }
+    },
+    {
+      "id": "single_003",
+      "category": "parameter_extraction",
+      "query": "使用MySQL数据库工具查询用户1003在2025-06的清扫记录。",
+      "required_tools": ["get_cleaning_records_from_db"],
+      "expected_arguments": {
+        "get_cleaning_records_from_db": {
+          "user_id": "1003",
+          "month": "2025-06"
+        }
+      }
+    },
+    {
+      "id": "single_004",
+      "category": "parameter_extraction",
+      "query": "使用MySQL数据库工具查询用户1004在2025-05生成月报所需的完整数据，但先不要撰写报告。",
+      "required_tools": ["get_monthly_report_data_from_db"],
+      "expected_arguments": {
+        "get_monthly_report_data_from_db": {
+          "user_id": "1004",
+          "month": "2025-05"
+        }
+      }
+    },
+    {
+      "id": "single_005",
+      "category": "tool_selection",
+      "query": "通过MCP查询用户1001的基本信息。",
+      "required_tools": ["get_user_profile_from_mcp"],
+      "expected_arguments": {
+        "get_user_profile_from_mcp": {"user_id": "1001"}
+      },
+      "tags": ["mcp"]
+    },
+    {
+      "id": "single_006",
+      "category": "tool_selection",
+      "query": "通过MCP查询用户1002绑定的设备。",
+      "required_tools": ["get_user_devices_from_mcp"],
+      "expected_arguments": {
+        "get_user_devices_from_mcp": {"user_id": "1002"}
+      },
+      "tags": ["mcp"]
+    },
+    {
+      "id": "single_007",
+      "category": "parameter_extraction",
+      "query": "通过MCP查询用户1003在2025-06的清扫记录。",
+      "required_tools": ["get_cleaning_records_from_mcp"],
+      "expected_arguments": {
+        "get_cleaning_records_from_mcp": {
+          "user_id": "1003",
+          "month": "2025-06"
+        }
+      },
+      "tags": ["mcp"]
+    },
+    {
+      "id": "single_008",
+      "category": "parameter_extraction",
+      "query": "通过MCP查询用户1001在2025-06生成月报所需的完整数据，但先不要撰写报告。",
+      "required_tools": ["get_monthly_report_data_from_mcp"],
+      "expected_arguments": {
+        "get_monthly_report_data_from_mcp": {
+          "user_id": "1001",
+          "month": "2025-06"
+        }
+      },
+      "tags": ["mcp"]
+    },
+    {
+      "id": "single_009",
+      "category": "rag",
+      "query": "扫地机器人边刷不转应该怎么排查？请查询知识库后回答。",
+      "required_tools": ["rag_summerize"]
+    },
+    {
+      "id": "single_010",
+      "category": "rag",
+      "query": "HEPA滤网多久清洗和更换一次？请查询知识库。",
+      "required_tools": ["rag_summerize"]
+    },
+    {
+      "id": "single_011",
+      "category": "rag",
+      "query": "扫地机器人找不到充电座怎么办？请调用知识库工具。",
+      "required_tools": ["rag_summerize"]
+    },
+    {
+      "id": "single_012",
+      "category": "rag",
+      "query": "木地板拖地应该设置多大出水量？请基于知识库回答。",
+      "required_tools": ["rag_summerize"]
+    },
+    {
+      "id": "single_013",
+      "category": "rag",
+      "query": "扫地机器人吸力下降有哪些常见原因？请查询知识库。",
+      "required_tools": ["rag_summerize"]
+    },
+    {
+      "id": "single_014",
+      "category": "weather",
+      "query": "合肥今天的天气是否适合使用扫拖机器人？先查询天气。",
+      "required_tools": ["get_weather"],
+      "expected_arguments": {
+        "get_weather": {"city": "合肥"}
+      }
+    },
+    {
+      "id": "single_015",
+      "category": "weather",
+      "query": "深圳天气怎么样？请调用天气工具。",
+      "required_tools": ["get_weather"],
+      "expected_arguments": {
+        "get_weather": {"city": "深圳"}
+      }
+    },
+    {
+      "id": "single_016",
+      "category": "weather",
+      "query": "杭州当前天气是否适合拖地？请先查询天气。",
+      "required_tools": ["get_weather"],
+      "expected_arguments": {
+        "get_weather": {"city": "杭州"}
+      }
+    },
+    {
+      "id": "single_017",
+      "category": "memory_write",
+      "query": "请记住，我是用户1005。",
+      "required_tools": ["save_memory_context"],
+      "expected_arguments": {
+        "save_memory_context": {"user_id": "1005"}
+      },
+      "expected_memory": {"user_id": "1005"}
+    },
+    {
+      "id": "single_018",
+      "category": "memory_write",
+      "query": "请记住，我在郑州。",
+      "required_tools": ["save_memory_context"],
+      "expected_arguments": {
+        "save_memory_context": {"city": "郑州"}
+      },
+      "expected_memory": {"city": "郑州"}
+    },
+    {
+      "id": "single_019",
+      "category": "memory_write",
+      "query": "请记住，我要查询的月份是2025-06。",
+      "required_tools": ["save_memory_context"],
+      "expected_arguments": {
+        "save_memory_context": {"month": "2025-06"}
+      },
+      "expected_memory": {"month": "2025-06"}
+    },
+    {
+      "id": "single_020",
+      "category": "no_tool",
+      "query": "你好。",
+      "required_tools": [],
+      "forbidden_tools": [
+        "get_user_id",
+        "get_user_location",
+        "get_current_month",
+        "fill_context_for_report"
+      ]
+    },
+    {
+      "id": "single_021",
+      "category": "no_tool",
+      "query": "谢谢你的帮助。",
+      "required_tools": [],
+      "forbidden_tools": [
+        "get_user_id",
+        "get_user_location",
+        "get_current_month",
+        "fill_context_for_report"
+      ]
+    },
+    {
+      "id": "single_022",
+      "category": "no_tool",
+      "query": "请用一句话介绍你能做什么。",
+      "required_tools": [],
+      "forbidden_tools": [
+        "get_user_id",
+        "get_user_location",
+        "get_current_month",
+        "fill_context_for_report"
+      ]
+    },
+    {
+      "id": "single_023",
+      "category": "missing_parameter",
+      "query": "请查询用户1001的清扫记录，但我还没有告诉你月份。不要随机猜测月份。",
+      "required_tools": [],
+      "forbidden_tools": [
+        "get_cleaning_records_from_db",
+        "get_cleaning_records_from_mcp",
+        "get_current_month"
+      ],
+      "required_answer_keywords_any": ["月份", "时间"]
+    },
+    {
+      "id": "single_024",
+      "category": "missing_parameter",
+      "query": "帮我查询某个用户的设备，但我还没有提供用户ID。请向我确认，不要随机生成用户。",
+      "required_tools": [],
+      "forbidden_tools": [
+        "get_user_devices_from_db",
+        "get_user_devices_from_mcp",
+        "get_user_id"
+      ],
+      "required_answer_keywords_any": ["用户ID", "用户编号", "ID"]
+    }
+  ],
+  "multi_turn_scenarios": [
+    {
+      "id": "multi_001",
+      "category": "memory_user_profile",
+      "turns": [
+        {
+          "query": "请记住，我是用户1001。",
+          "required_tools": ["save_memory_context"],
+          "expected_arguments": {
+            "save_memory_context": {"user_id": "1001"}
+          },
+          "expected_memory": {"user_id": "1001"}
+        },
+        {
+          "query": "查询我的用户画像，请先读取当前会话记忆。",
+          "required_tools": [
+            "get_memory_context",
+            "get_user_profile_from_db"
+          ],
+          "expected_arguments": {
+            "get_user_profile_from_db": {"user_id": "1001"}
+          },
+          "expected_memory": {"user_id": "1001"},
+          "memory_inheritance": true
+        }
+      ]
+    },
+    {
+      "id": "multi_002",
+      "category": "memory_city_weather",
+      "turns": [
+        {
+          "query": "请记住，我在合肥。",
+          "required_tools": ["save_memory_context"],
+          "expected_arguments": {
+            "save_memory_context": {"city": "合肥"}
+          },
+          "expected_memory": {"city": "合肥"}
+        },
+        {
+          "query": "我所在城市天气怎么样？请先读取会话记忆。",
+          "required_tools": [
+            "get_memory_context",
+            "get_weather"
+          ],
+          "expected_arguments": {
+            "get_weather": {"city": "合肥"}
+          },
+          "expected_memory": {"city": "合肥"},
+          "memory_inheritance": true
+        }
+      ]
+    },
+    {
+      "id": "multi_003",
+      "category": "memory_records",
+      "turns": [
+        {
+          "query": "请记住，我是用户1003，要查询2025-06。",
+          "required_tools": ["save_memory_context"],
+          "expected_arguments": {
+            "save_memory_context": {
+              "user_id": "1003",
+              "month": "2025-06"
+            }
+          },
+          "expected_memory": {
+            "user_id": "1003",
+            "month": "2025-06"
+          }
+        },
+        {
+          "query": "查询我这个月的清扫记录，请先读取当前会话记忆并使用MySQL工具。",
+          "required_tools": [
+            "get_memory_context",
+            "get_cleaning_records_from_db"
+          ],
+          "expected_arguments": {
+            "get_cleaning_records_from_db": {
+              "user_id": "1003",
+              "month": "2025-06"
+            }
+          },
+          "expected_memory": {
+            "user_id": "1003",
+            "month": "2025-06"
+          },
+          "memory_inheritance": true
+        }
+      ]
+    },
+    {
+      "id": "multi_004",
+      "category": "memory_overwrite",
+      "turns": [
+        {
+          "query": "请记住，我是用户1001。",
+          "required_tools": ["save_memory_context"],
+          "expected_memory": {"user_id": "1001"}
+        },
+        {
+          "query": "现在切换为用户1002，请更新记忆。",
+          "required_tools": ["save_memory_context"],
+          "expected_arguments": {
+            "save_memory_context": {"user_id": "1002"}
+          },
+          "expected_memory": {"user_id": "1002"}
+        },
+        {
+          "query": "查询我绑定的设备，请先读取记忆并使用MySQL工具。",
+          "required_tools": [
+            "get_memory_context",
+            "get_user_devices_from_db"
+          ],
+          "expected_arguments": {
+            "get_user_devices_from_db": {"user_id": "1002"}
+          },
+          "expected_memory": {"user_id": "1002"},
+          "memory_inheritance": true
+        }
+      ]
+    },
+    {
+      "id": "multi_005",
+      "category": "memory_clear",
+      "turns": [
+        {
+          "query": "请记住，我是用户1005，我在郑州。",
+          "required_tools": ["save_memory_context"],
+          "expected_memory": {
+            "user_id": "1005",
+            "city": "郑州"
+          }
+        },
+        {
+          "query": "清空当前会话记忆。",
+          "required_tools": ["clear_memory_context"],
+          "expected_memory": {}
+        }
+      ]
+    },
+    {
+      "id": "multi_006",
+      "category": "memory_month_overwrite",
+      "turns": [
+        {
+          "query": "请记住，我要查询2025-05。",
+          "required_tools": ["save_memory_context"],
+          "expected_memory": {"month": "2025-05"}
+        },
+        {
+          "query": "把查询月份改成2025-06。",
+          "required_tools": ["save_memory_context"],
+          "expected_arguments": {
+            "save_memory_context": {"month": "2025-06"}
+          },
+          "expected_memory": {"month": "2025-06"}
+        }
+      ]
+    },
+    {
+      "id": "multi_007",
+      "category": "session_isolation",
+      "session_isolation": true,
+      "turns": [
+        {
+          "session_suffix": "a",
+          "query": "请记住，我是用户1001。",
+          "required_tools": ["save_memory_context"],
+          "expected_memory": {"user_id": "1001"}
+        },
+        {
+          "session_suffix": "b",
+          "query": "请记住，我是用户1002。",
+          "required_tools": ["save_memory_context"],
+          "expected_memory": {"user_id": "1002"}
+        },
+        {
+          "session_suffix": "a",
+          "query": "读取当前会话记忆，并告诉我用户ID。",
+          "required_tools": ["get_memory_context"],
+          "expected_memory": {"user_id": "1001"},
+          "memory_inheritance": true
+        }
+      ]
+    }
+  ]
+}

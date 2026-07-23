@@ -1,0 +1,29 @@
+# config/semantic_cache.yml
+
+enable_semantic_cache: true
+
+collection_name: rag_semantic_cache
+persist_directory: chroma_db_semantic_cache
+
+# 保留旧接口兼容，不再用于正式语义缓存放行
+similarity_threshold: 0.84
+
+# Embedding候选召回
+candidate_threshold: 0.54
+candidate_top_k: 3
+candidate_fetch_k: 10
+
+cache_ttl_seconds: 86400
+
+# Cross-Encoder候选验证
+enable_candidate_verification: true
+verifier_model_name: "BAAI/bge-reranker-v2-m3"
+verifier_device: "auto"
+verifier_batch_size: 8
+verifier_max_length: 512
+
+# 组合评估得到的推荐值
+verifier_threshold: 0.50
+
+# 验证异常时不返回缓存
+verifier_fail_closed: true

@@ -1,0 +1,147 @@
+{
+  "cases": [
+    {
+      "id": "same_001",
+      "query": "扫地机侧刷不动了怎么办？",
+      "cached_query": "扫地机器人边刷不转怎么办？",
+      "expected_compatible": true,
+      "description": "侧刷和边刷属于同一部件"
+    },
+    {
+      "id": "same_002",
+      "query": "主滚刷被毛发缠住怎么清理？",
+      "cached_query": "扫地机器人主刷缠绕毛发怎么办？",
+      "expected_compatible": true,
+      "description": "主滚刷和主刷属于同一部件"
+    },
+    {
+      "id": "same_003",
+      "query": "过滤芯多久需要换新？",
+      "cached_query": "HEPA滤网多久清洗和更换一次？",
+      "expected_compatible": true,
+      "description": "过滤芯和HEPA滤网属于同一部件"
+    },
+    {
+      "id": "same_004",
+      "query": "回不到充电基座怎么办？",
+      "cached_query": "扫地机器人找不到充电座怎么办？",
+      "expected_compatible": true,
+      "description": "同为找不到充电座场景"
+    },
+    {
+      "id": "same_005",
+      "query": "实木地板应该设置多大出水量？",
+      "cached_query": "木地板拖地应该使用多大的出水量？",
+      "expected_compatible": true,
+      "description": "实木地板属于木地板"
+    },
+    {
+      "id": "same_006",
+      "query": "APP中的地图错位怎么恢复？",
+      "cached_query": "扫地机器人地图错乱怎么办？",
+      "expected_compatible": true,
+      "description": "同为地图异常"
+    },
+    {
+      "id": "same_007",
+      "query": "水盒出现渗水怎么处理？",
+      "cached_query": "扫地机器人水箱漏水怎么办？",
+      "expected_compatible": true,
+      "description": "同为水箱漏水"
+    },
+    {
+      "id": "same_008",
+      "query": "扫地机吸尘能力变弱怎么办？",
+      "cached_query": "扫地机器人吸力下降怎么办？",
+      "expected_compatible": true,
+      "description": "同为吸力下降"
+    },
+    {
+      "id": "conflict_001",
+      "query": "扫地机器人主刷不转怎么办？",
+      "cached_query": "扫地机器人边刷不转怎么办？",
+      "expected_compatible": false,
+      "description": "主刷与边刷冲突"
+    },
+    {
+      "id": "conflict_002",
+      "query": "拖布不旋转怎么办？",
+      "cached_query": "扫地机器人边刷不转怎么办？",
+      "expected_compatible": false,
+      "description": "拖布与边刷冲突"
+    },
+    {
+      "id": "conflict_003",
+      "query": "瓷砖地面应该设置多大出水量？",
+      "cached_query": "木地板应该使用多大的出水量？",
+      "expected_compatible": false,
+      "description": "瓷砖与木地板冲突"
+    },
+    {
+      "id": "conflict_004",
+      "query": "机器人充不上电怎么办？",
+      "cached_query": "扫地机器人找不到充电座怎么办？",
+      "expected_compatible": false,
+      "description": "无法充电与找不到充电座冲突"
+    },
+    {
+      "id": "conflict_005",
+      "query": "边刷旋转时有异响怎么办？",
+      "cached_query": "扫地机器人边刷不转怎么办？",
+      "expected_compatible": false,
+      "description": "异响与不旋转冲突"
+    },
+    {
+      "id": "conflict_006",
+      "query": "主刷缠绕毛发怎么办？",
+      "cached_query": "扫地机器人主刷不转怎么办？",
+      "expected_compatible": false,
+      "description": "缠绕与不旋转故障冲突"
+    },
+    {
+      "id": "conflict_007",
+      "query": "滤网需要更换吗？",
+      "cached_query": "水箱漏水怎么办？",
+      "expected_compatible": false,
+      "description": "滤网与水箱冲突"
+    },
+    {
+      "id": "conflict_008",
+      "query": "地毯需要设置多大吸力？",
+      "cached_query": "木地板应该使用多大的出水量？",
+      "expected_compatible": false,
+      "description": "地毯与木地板冲突"
+    },
+    {
+      "id": "unknown_001",
+      "query": "机器工作不正常怎么办？",
+      "cached_query": "机器人出现故障如何处理？",
+      "expected_compatible": true,
+      "expected_status": "unknown",
+      "description": "双方没有可识别实体，保守模式交给Cross-Encoder"
+    },
+    {
+      "id": "unknown_002",
+      "query": "这个问题怎么解决？",
+      "cached_query": "扫地机器人地图错乱怎么办？",
+      "expected_compatible": true,
+      "expected_status": "unknown",
+      "description": "只有缓存问题有实体，不能直接判断冲突"
+    },
+    {
+      "id": "unknown_003",
+      "query": "边刷出现问题怎么办？",
+      "cached_query": "机器人清洁效果不好怎么办？",
+      "expected_compatible": true,
+      "expected_status": "unknown",
+      "description": "只有用户问题识别到实体"
+    },
+    {
+      "id": "multi_001",
+      "query": "主刷或边刷不转怎么办？",
+      "cached_query": "边刷停止旋转怎么处理？",
+      "expected_compatible": true,
+      "description": "多实体问题与候选存在交集"
+    }
+  ]
+}

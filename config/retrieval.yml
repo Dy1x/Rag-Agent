@@ -1,0 +1,32 @@
+retrieval_mode: "hybrid"
+# 可选: "vector" / "bm25" / "hybrid"
+
+enable_bm25_retriever: true
+enable_hybrid_retriever: true
+
+# 第一阶段：粗召回
+vector_k: 10
+bm25_k: 10
+hybrid_k: 20
+
+vector_weight: 0.6
+bm25_weight: 0.4
+bm25_use_jieba: true
+
+# 第二阶段：本地CrossEncoder重排序
+enable_rerank: true
+rerank_type: "cross_encoder"
+rerank_model_name: "BAAI/bge-reranker-v2-m3"
+
+# auto / cpu / cuda
+rerank_device: "auto"
+
+rerank_top_k: 5
+rerank_batch_size: 8
+rerank_max_length: 512
+
+# 第一轮测试不设置阈值
+rerank_score_threshold: null
+
+# 模型失败时退回原始Hybrid顺序
+rerank_fallback_enabled: true

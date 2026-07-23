@@ -1,0 +1,167 @@
+{
+  "base_entries": [
+    {
+      "base_id": "base_001",
+      "query": "扫地机器人边刷不转怎么办？",
+      "answer": "检查边刷是否缠绕杂物、是否安装到位，清理转轴后重新安装；若电机仍不转，联系售后。"
+    },
+    {
+      "base_id": "base_002",
+      "query": "扫地机器人主刷缠绕毛发怎么办？",
+      "answer": "拆卸主刷，用剪刀剪断缠绕毛发，并清理滚刷仓内的杂物。"
+    },
+    {
+      "base_id": "base_003",
+      "query": "HEPA滤网多久清洗和更换一次？",
+      "answer": "滤网可定期清理并按说明水洗晾干，通常使用3至6个月后更换。"
+    },
+    {
+      "base_id": "base_004",
+      "query": "扫地机器人找不到充电座怎么办？",
+      "answer": "清理充电座周围障碍物，擦拭回充传感器，并确认充电座位置和供电正常。"
+    },
+    {
+      "base_id": "base_005",
+      "query": "扫地机器人水箱漏水怎么办？",
+      "answer": "检查水箱盖、密封圈和出水管，避免加水过满；水箱破损时应及时更换。"
+    },
+    {
+      "base_id": "base_006",
+      "query": "木地板拖地应该使用多大的出水量？",
+      "answer": "木地板应使用低档出水量或干拖模式，避免地面积水导致起翘变形。"
+    },
+    {
+      "base_id": "base_007",
+      "query": "扫地机器人吸力下降怎么办？",
+      "answer": "检查并清理尘盒、滤网、风道、主刷和吸口，排除堵塞后再测试吸力。"
+    },
+    {
+      "base_id": "base_008",
+      "query": "扫地机器人地图错乱怎么办？",
+      "answer": "清理反光物和移动障碍物，删除旧地图后让机器人重新建图。"
+    },
+    {
+      "base_id": "base_009",
+      "query": "地毯多的家庭应该选择多大吸力的扫地机器人？",
+      "answer": "地毯场景应选择较大且可调节的吸力，并优先考虑地毯识别和自动增压功能。"
+    },
+    {
+      "base_id": "base_010",
+      "query": "扫地机器人拖地后有水痕怎么办？",
+      "answer": "清洗或更换拖布，调小出水量并适当降低清扫速度。"
+    }
+  ],
+  "queries": [
+    {"id":"p001","type":"semantic_hit","expected_base_id":"base_001","query":"机器人旁边的小刷子突然不动了怎么处理？"},
+    {"id":"p002","type":"semantic_hit","expected_base_id":"base_001","query":"扫地机侧刷停止旋转应该检查哪里？"},
+    {"id":"p003","type":"semantic_hit","expected_base_id":"base_001","query":"边刷卡住不工作了要怎么修？"},
+    {"id":"p004","type":"semantic_hit","expected_base_id":"base_001","query":"扫地机器人的边刷电机不转怎么办？"},
+    {"id":"p005","type":"semantic_hit","expected_base_id":"base_001","query":"侧边的小毛刷不转了如何排查？"},
+
+    {"id":"p006","type":"semantic_hit","expected_base_id":"base_002","query":"滚刷被头发缠住了应该怎样清理？"},
+    {"id":"p007","type":"semantic_hit","expected_base_id":"base_002","query":"机器人主滚刷上全是毛发怎么办？"},
+    {"id":"p008","type":"semantic_hit","expected_base_id":"base_002","query":"扫地机中间的刷子被长头发卡死了怎么处理？"},
+    {"id":"p009","type":"semantic_hit","expected_base_id":"base_002","query":"主刷缠了很多头发如何拆下来清洁？"},
+    {"id":"p010","type":"semantic_hit","expected_base_id":"base_002","query":"滚刷仓里毛发太多该如何清理？"},
+
+    {"id":"p011","type":"semantic_hit","expected_base_id":"base_003","query":"机器人HEPA过滤网多长时间洗一次？"},
+    {"id":"p012","type":"semantic_hit","expected_base_id":"base_003","query":"扫地机滤芯多久需要换新？"},
+    {"id":"p013","type":"semantic_hit","expected_base_id":"base_003","query":"HEPA滤网能清洗吗，使用多久要更换？"},
+    {"id":"p014","type":"semantic_hit","expected_base_id":"base_003","query":"扫地机器人的过滤网保养周期是多久？"},
+    {"id":"p015","type":"semantic_hit","expected_base_id":"base_003","query":"滤网应该多久清理一次以及多久更换？"},
+
+    {"id":"p016","type":"semantic_hit","expected_base_id":"base_004","query":"机器人一直回不到充电座怎么处理？"},
+    {"id":"p017","type":"semantic_hit","expected_base_id":"base_004","query":"扫地机找不到基站应该检查哪些地方？"},
+    {"id":"p018","type":"semantic_hit","expected_base_id":"base_004","query":"机器人无法自动回充是什么原因？"},
+    {"id":"p019","type":"semantic_hit","expected_base_id":"base_004","query":"扫完地后机器找不到充电基座怎么办？"},
+    {"id":"p020","type":"semantic_hit","expected_base_id":"base_004","query":"回充失败需要清理哪些传感器？"},
+
+    {"id":"p021","type":"semantic_hit","expected_base_id":"base_005","query":"机器人拖地水箱一直渗水怎么办？"},
+    {"id":"p022","type":"semantic_hit","expected_base_id":"base_005","query":"扫拖机的水盒漏水应该检查哪里？"},
+    {"id":"p023","type":"semantic_hit","expected_base_id":"base_005","query":"加水以后水箱往外漏怎么处理？"},
+    {"id":"p024","type":"semantic_hit","expected_base_id":"base_005","query":"拖地模块出现漏水该怎样排查？"},
+    {"id":"p025","type":"semantic_hit","expected_base_id":"base_005","query":"水箱密封不好导致漏水怎么办？"},
+
+    {"id":"p026","type":"semantic_hit","expected_base_id":"base_006","query":"木质地板拖地时出水档位怎么选？"},
+    {"id":"p027","type":"semantic_hit","expected_base_id":"base_006","query":"拖木地板应该把水量调到几档？"},
+    {"id":"p028","type":"semantic_hit","expected_base_id":"base_006","query":"实木地板使用扫拖机器人要调小出水吗？"},
+    {"id":"p029","type":"semantic_hit","expected_base_id":"base_006","query":"木地板怕积水，机器人拖地水量如何设置？"},
+    {"id":"p030","type":"semantic_hit","expected_base_id":"base_006","query":"扫拖机清洁木地板时用低档还是高档水量？"},
+
+    {"id":"p031","type":"semantic_hit","expected_base_id":"base_007","query":"扫地机吸尘能力突然变弱怎么处理？"},
+    {"id":"p032","type":"semantic_hit","expected_base_id":"base_007","query":"机器人吸不干净灰尘，需要清理哪些位置？"},
+    {"id":"p033","type":"semantic_hit","expected_base_id":"base_007","query":"扫地机器人吸力越来越小是什么原因？"},
+    {"id":"p034","type":"semantic_hit","expected_base_id":"base_007","query":"机器吸力不足时应该检查滤网还是风道？"},
+    {"id":"p035","type":"semantic_hit","expected_base_id":"base_007","query":"扫地机吸不动垃圾该怎么恢复吸力？"},
+
+    {"id":"p036","type":"semantic_hit","expected_base_id":"base_008","query":"扫地机器人的地图画乱了怎么恢复？"},
+    {"id":"p037","type":"semantic_hit","expected_base_id":"base_008","query":"APP里的房间地图错位了如何解决？"},
+    {"id":"p038","type":"semantic_hit","expected_base_id":"base_008","query":"机器人建图不完整而且路线混乱怎么办？"},
+    {"id":"p039","type":"semantic_hit","expected_base_id":"base_008","query":"地图出现重叠和缺失需要重新建图吗？"},
+    {"id":"p040","type":"semantic_hit","expected_base_id":"base_008","query":"扫地机保存的地图乱掉了如何重置？"},
+
+    {"id":"p041","type":"semantic_hit","expected_base_id":"base_009","query":"家里铺了很多地毯，扫地机吸力应该选多大？"},
+    {"id":"p042","type":"semantic_hit","expected_base_id":"base_009","query":"地毯家庭购买机器人需要关注多少Pa吸力？"},
+    {"id":"p043","type":"semantic_hit","expected_base_id":"base_009","query":"主要清扫地毯应该买大吸力机型吗？"},
+    {"id":"p044","type":"semantic_hit","expected_base_id":"base_009","query":"地毯比较厚，选扫地机器人要关注哪些吸力功能？"},
+    {"id":"p045","type":"semantic_hit","expected_base_id":"base_009","query":"地毯场景需要地毯增压和多大吸力？"},
+
+    {"id":"p046","type":"semantic_hit","expected_base_id":"base_010","query":"机器人拖完地总留下一条条水印怎么办？"},
+    {"id":"p047","type":"semantic_hit","expected_base_id":"base_010","query":"拖地后地面有明显水渍如何调整？"},
+    {"id":"p048","type":"semantic_hit","expected_base_id":"base_010","query":"扫拖机拖完以后有水痕，是不是出水太大？"},
+    {"id":"p049","type":"semantic_hit","expected_base_id":"base_010","query":"拖布留下条纹状水痕应该怎么处理？"},
+    {"id":"p050","type":"semantic_hit","expected_base_id":"base_010","query":"地面拖完有水印，需要换拖布还是调水量？"},
+
+    {"id":"n001","type":"semantic_miss","query":"扫地机器人主刷不转怎么办？"},
+    {"id":"n002","type":"semantic_miss","query":"边刷旋转时有异响怎么办？"},
+    {"id":"n003","type":"semantic_miss","query":"边刷安装后松动怎么办？"},
+    {"id":"n004","type":"semantic_miss","query":"边刷磨损后多久更换？"},
+    {"id":"n005","type":"semantic_miss","query":"主刷需要多久更换一次？"},
+    {"id":"n006","type":"semantic_miss","query":"滚刷旋转时发出咔咔声怎么办？"},
+    {"id":"n007","type":"semantic_miss","query":"滤网堵塞报警怎么处理？"},
+    {"id":"n008","type":"semantic_miss","query":"尘盒多久清理一次？"},
+    {"id":"n009","type":"semantic_miss","query":"滤网清洗后仍然报警怎么办？"},
+    {"id":"n010","type":"semantic_miss","query":"机器人充不上电怎么办？"},
+    {"id":"n011","type":"semantic_miss","query":"充电座指示灯不亮怎么办？"},
+    {"id":"n012","type":"semantic_miss","query":"机器人充满电后续航很短怎么办？"},
+    {"id":"n013","type":"semantic_miss","query":"水箱不出水怎么办？"},
+    {"id":"n014","type":"semantic_miss","query":"水箱里面有异味怎么清理？"},
+    {"id":"n015","type":"semantic_miss","query":"水箱出水量太大怎么调节？"},
+    {"id":"n016","type":"semantic_miss","query":"瓷砖地面拖地应该使用多大出水量？"},
+    {"id":"n017","type":"semantic_miss","query":"地毯区域如何设置禁拖区？"},
+    {"id":"n018","type":"semantic_miss","query":"拖布不旋转怎么办？"},
+    {"id":"n019","type":"semantic_miss","query":"机器人工作时噪音很大怎么办？"},
+    {"id":"n020","type":"semantic_miss","query":"扫地机器人频繁碰撞家具怎么办？"},
+    {"id":"n021","type":"semantic_miss","query":"机器人漏扫房间角落怎么办？"},
+    {"id":"n022","type":"semantic_miss","query":"扫地机器人无法连接WiFi怎么办？"},
+    {"id":"n023","type":"semantic_miss","query":"机器人开机后马上关机怎么办？"},
+    {"id":"n024","type":"semantic_miss","query":"防跌落传感器故障怎么处理？"},
+    {"id":"n025","type":"semantic_miss","query":"小户型应该选择什么导航方式？"},
+    {"id":"n026","type":"semantic_miss","query":"有宠物的家庭应该选择什么主刷？"},
+    {"id":"n027","type":"semantic_miss","query":"自动集尘袋多久更换一次？"},
+    {"id":"n028","type":"semantic_miss","query":"拖布多久清洗和更换一次？"},
+    {"id":"n029","type":"semantic_miss","query":"机器人跨不过门槛怎么办？"},
+    {"id":"n030","type":"semantic_miss","query":"APP无法选择分区清扫怎么办？"},
+
+    {"id":"u001","type":"safety_bypass","query":"查询用户ID 1001的基本信息"},
+    {"id":"u002","type":"safety_bypass","query":"用户编号1002绑定了哪些设备？"},
+    {"id":"u003","type":"safety_bypass","query":"查询用户1003本月的清扫记录"},
+    {"id":"u004","type":"safety_bypass","query":"帮我生成本月报告"},
+    {"id":"u005","type":"safety_bypass","query":"帮我查看上月报告"},
+    {"id":"u006","type":"safety_bypass","query":"查询2026年5月的月度报告"},
+    {"id":"u007","type":"safety_bypass","query":"我的设备序列号是什么？"},
+    {"id":"u008","type":"safety_bypass","query":"我的设备固件是不是最新版本？"},
+    {"id":"u009","type":"safety_bypass","query":"查询当前固件版本"},
+    {"id":"u010","type":"safety_bypass","query":"我的订单现在是什么状态？"},
+    {"id":"u011","type":"safety_bypass","query":"查看我的账号绑定信息"},
+    {"id":"u012","type":"safety_bypass","query":"我所在城市今天适合拖地吗？"},
+    {"id":"u013","type":"safety_bypass","query":"当地天气潮湿时怎么使用机器人？"},
+    {"id":"u014","type":"safety_bypass","query":"我所在地区今天会下雨吗？"},
+    {"id":"u015","type":"safety_bypass","query":"当前城市湿度高，拖地要注意什么？"},
+    {"id":"u016","type":"safety_bypass","query":"南方回南天应该如何设置出水量？"},
+    {"id":"u017","type":"safety_bypass","query":"北方干燥环境如何保养拖布？"},
+    {"id":"u018","type":"safety_bypass","query":"高温天气下我的设备还能工作吗？"},
+    {"id":"u019","type":"safety_bypass","query":"查询用户ID 1005在2026-06的使用报告"},
+    {"id":"u020","type":"safety_bypass","query":"我的设备本月运行了多少次？"}
+  ]
+}

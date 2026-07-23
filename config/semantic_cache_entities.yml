@@ -1,0 +1,185 @@
+enabled: true
+
+# conservative表示只拒绝明确冲突。
+# 某一边没有识别到实体时，不直接拒绝。
+mode: conservative
+
+dimensions:
+  component:
+    label: "设备部件"
+    values:
+      main_brush:
+        label: "主刷"
+        aliases:
+          - "主刷"
+          - "主滚刷"
+          - "中刷"
+          - "中央滚刷"
+
+      side_brush:
+        label: "边刷"
+        aliases:
+          - "边刷"
+          - "侧刷"
+          - "侧边刷"
+
+      mop:
+        label: "拖布"
+        aliases:
+          - "拖布"
+          - "拖地布"
+          - "抹布盘"
+
+
+      water_tank:
+        label: "水箱"
+        aliases:
+          - "水箱"
+          - "净水箱"
+          - "污水箱"
+          - "水盒"
+
+      filter:
+        label: "滤网"
+        aliases:
+          - "滤网"
+          - "过滤网"
+          - "过滤芯"
+          - "滤芯"
+          - "HEPA"
+
+      charging_dock:
+        label: "充电座"
+        aliases:
+          - "充电座"
+          - "充电基座"
+          - "回充座"
+          - "基站"
+
+      wheel:
+        label: "驱动轮"
+        aliases:
+          - "驱动轮"
+          - "行走轮"
+          - "轮子"
+
+      sensor:
+        label: "传感器"
+        aliases:
+          - "传感器"
+          - "感应器"
+          - "雷达"
+          - "激光雷达"
+
+  floor_material:
+    label: "地面材质"
+    values:
+      wood_floor:
+        label: "木地板"
+        aliases:
+          - "木地板"
+          - "实木地板"
+          - "复合地板"
+          - "木质地面"
+
+      tile:
+        label: "瓷砖"
+        aliases:
+          - "瓷砖"
+          - "地砖"
+          - "瓷砖地面"
+
+      carpet:
+        label: "地毯"
+        aliases:
+          - "地毯"
+          - "短毛地毯"
+          - "长毛地毯"
+          - "毛毯"
+
+      marble:
+        label: "石材地面"
+        aliases:
+          - "大理石"
+          - "石材地面"
+
+  fault:
+    label: "故障类型"
+    values:
+      not_rotating:
+        label: "不旋转"
+        aliases:
+          - "不转"
+          - "不旋转"
+          - "停止旋转"
+          - "转不动"
+          - "不工作"
+          - "不动了"
+
+      tangled:
+        label: "缠绕"
+        aliases:
+          - "缠绕"
+          - "缠住"
+          - "卡住"
+          - "毛发缠住"
+          - "被线缠住"
+
+      abnormal_noise:
+        label: "异响"
+        aliases:
+          - "异响"
+          - "噪音"
+          - "声音很大"
+          - "咔咔声"
+          - "异常声音"
+
+      leaking:
+        label: "漏水"
+        aliases:
+          - "漏水"
+          - "渗水"
+          - "滴水"
+
+      weak_suction:
+        label: "吸力下降"
+        aliases:
+          - "吸力下降"
+          - "吸力变小"
+          - "吸力不足"
+          - "吸不动"
+          - "吸尘能力变弱"
+
+      map_error:
+        label: "地图异常"
+        aliases:
+          - "地图错乱"
+          - "地图错位"
+          - "地图重叠"
+          - "地图缺失"
+          - "地图乱了"
+
+  charging_intent:
+    label: "充电场景"
+    values:
+      cannot_find_dock:
+        label: "找不到充电座"
+        aliases:
+          - "找不到充电座"
+          - "找不到充电基座"
+          - "找不到基站"
+          - "无法回到充电座"
+          - "回不到充电座"
+          - "无法自动回充"
+          - "回充失败"
+
+      cannot_charge:
+        label: "无法充电"
+        aliases:
+          - "充不上电"
+          - "无法充电"
+          - "不能充电"
+          - "充不进去"
+          - "没有充电"
+          - "充电失败"
+

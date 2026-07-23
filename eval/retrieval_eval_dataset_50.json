@@ -1,0 +1,402 @@
+[
+  {
+    "id": "faq_001",
+    "category": "基础使用",
+    "question": "第一次拿到扫地机器人，应该先做哪些准备？",
+    "expected_sources": ["扫地机器人100问2.txt"],
+    "expected_keywords": ["包装", "充满电", "建图"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "faq_002",
+    "category": "基础使用",
+    "question": "机器人开机了但是趴在原地不走，怎么排查？",
+    "expected_sources": ["扫地机器人100问2.txt", "故障排除.txt"],
+    "expected_keywords": ["驱动轮", "万向轮", "毛发"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "faq_003",
+    "category": "基础使用",
+    "question": "扫地机一直找不到充电座，需要检查什么？",
+    "expected_sources": ["扫地机器人100问2.txt", "故障排除.txt"],
+    "expected_keywords": ["充电座", "障碍物", "回充传感器"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "faq_004",
+    "category": "基础使用",
+    "question": "手机连不上扫地机器人，5G WiFi 能直接用吗？",
+    "expected_sources": ["扫地机器人100问2.txt", "故障排除.txt"],
+    "expected_keywords": ["2.4G", "WiFi", "路由器"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "faq_005",
+    "category": "基础使用",
+    "question": "家里的地图画乱了，而且房间还缺了一块，如何恢复？",
+    "expected_sources": ["扫地机器人100问2.txt", "故障排除.txt"],
+    "expected_keywords": ["反光", "旧地图", "重新建图"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "faq_006",
+    "category": "清洁效果",
+    "question": "扫完以后地上还有灰和碎屑，应该调哪里？",
+    "expected_sources": ["扫地机器人100问2.txt"],
+    "expected_keywords": ["主刷", "滤网", "吸力"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "faq_007",
+    "category": "清洁效果",
+    "question": "机器人总是漏掉同一个房间角落怎么办？",
+    "expected_sources": ["扫地机器人100问2.txt", "故障排除.txt"],
+    "expected_keywords": ["禁区", "重新建图", "补扫"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "faq_008",
+    "category": "清洁效果",
+    "question": "地毯上的灰吸不干净，怎么增强清洁效果？",
+    "expected_sources": ["扫地机器人100问2.txt"],
+    "expected_keywords": ["地毯增压", "吸力", "最大"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "faq_009",
+    "category": "耗材维护",
+    "question": "主刷被长头发缠死了，正确的清理步骤是什么？",
+    "expected_sources": ["扫地机器人100问2.txt", "维护保养.txt"],
+    "expected_keywords": ["主刷", "剪刀", "毛发"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "faq_010",
+    "category": "耗材维护",
+    "question": "HEPA 滤网能不能水洗，大概多久换新？",
+    "expected_sources": ["扫地机器人100问2.txt", "维护保养.txt"],
+    "expected_keywords": ["清水", "晾干", "3-6个月"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "mop_001",
+    "category": "扫拖功能",
+    "question": "扫拖一体机能否关闭拖地，只进行吸尘？",
+    "expected_sources": ["扫拖一体机器人100问.txt"],
+    "expected_keywords": ["关闭", "拖地功能", "吸尘模式"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "mop_002",
+    "category": "扫拖功能",
+    "question": "我想让机器人先吸尘再拖地，APP 里怎么设置？",
+    "expected_sources": ["扫拖一体机器人100问.txt"],
+    "expected_keywords": ["先扫后拖", "自定义清扫", "出水量"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "mop_003",
+    "category": "拖地系统",
+    "question": "刚给水箱加满水就开始漏，可能是哪里没装好？",
+    "expected_sources": ["扫拖一体机器人100问.txt", "故障排除.txt"],
+    "expected_keywords": ["水箱盖", "密封圈", "出水管"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "mop_004",
+    "category": "拖地系统",
+    "question": "木地板拖地时应该选多大的出水量？",
+    "expected_sources": ["扫拖一体机器人100问.txt", "选购指南.txt"],
+    "expected_keywords": ["木地板", "低档", "出水量"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "mop_005",
+    "category": "拖地系统",
+    "question": "清洁液可以直接倒进水箱吗，应该用什么比例？",
+    "expected_sources": ["扫拖一体机器人100问.txt"],
+    "expected_keywords": ["专用清洁液", "1:100", "清水"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "mop_006",
+    "category": "拖地系统",
+    "question": "两个旋转拖布突然不转了，应该如何排查？",
+    "expected_sources": ["扫拖一体机器人100问.txt", "故障排除.txt"],
+    "expected_keywords": ["毛发", "电机", "安装"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "mop_007",
+    "category": "拖地系统",
+    "question": "拖完地总有一条一条的水印，怎么调整？",
+    "expected_sources": ["扫拖一体机器人100问.txt", "故障排除.txt"],
+    "expected_keywords": ["拖布", "出水量", "水痕"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "mop_008",
+    "category": "清洁效果",
+    "question": "不希望机器人把湿拖布带到地毯上，如何设置？",
+    "expected_sources": ["扫拖一体机器人100问.txt"],
+    "expected_keywords": ["禁拖区", "地毯", "抬升拖布"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "mop_009",
+    "category": "清洁效果",
+    "question": "厨房地面油污很重，扫拖机器人怎么清洁更有效？",
+    "expected_sources": ["扫拖一体机器人100问.txt"],
+    "expected_keywords": ["大吸力", "清洁液", "多次拖扫"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "mop_010",
+    "category": "拖地系统",
+    "question": "基站提示污水箱满了，接下来该怎么处理？",
+    "expected_sources": ["扫拖一体机器人100问.txt"],
+    "expected_keywords": ["倾倒污水", "污水仓", "过滤网"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "fault_001",
+    "category": "故障排除",
+    "question": "按下开机键完全没反应，灯也不亮，先检查哪些部件？",
+    "expected_sources": ["故障排除.txt"],
+    "expected_keywords": ["电源适配器", "电源线", "电池"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "fault_002",
+    "category": "故障排除",
+    "question": "机器刚开机马上又自动关机是什么原因？",
+    "expected_sources": ["故障排除.txt"],
+    "expected_keywords": ["电量", "过热", "鼓包"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "fault_003",
+    "category": "故障排除",
+    "question": "扫地机吸力突然变得很小，需要清理哪些位置？",
+    "expected_sources": ["故障排除.txt"],
+    "expected_keywords": ["尘盒", "滤网", "风道"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "fault_004",
+    "category": "故障排除",
+    "question": "边刷装上以后还是不旋转，而且电机有异响，怎么办？",
+    "expected_sources": ["故障排除.txt"],
+    "expected_keywords": ["边刷", "转轴", "电机"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "fault_005",
+    "category": "故障排除",
+    "question": "充电时指示灯一直闪，但是电量充不进去，怎么检查？",
+    "expected_sources": ["故障排除.txt"],
+    "expected_keywords": ["充电触点", "电源适配器", "电池"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "fault_006",
+    "category": "故障排除",
+    "question": "机器人总撞桌腿，避障能力明显变差了怎么办？",
+    "expected_sources": ["故障排除.txt", "扫地机器人100问2.txt"],
+    "expected_keywords": ["避障", "传感器", "防撞条"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "fault_007",
+    "category": "故障排除",
+    "question": "APP 明明设了禁区，机器人为什么还是会进去？",
+    "expected_sources": ["故障排除.txt", "扫地机器人100问2.txt"],
+    "expected_keywords": ["禁区边界", "地图", "临时取消"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "fault_008",
+    "category": "故障排除",
+    "question": "机器运行时特别烫，还有一股异味，应该怎么处理？",
+    "expected_sources": ["故障排除.txt"],
+    "expected_keywords": ["立即关机", "风道", "电池"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "fault_009",
+    "category": "故障排除",
+    "question": "尘盒已经装好了，为什么还提示尘盒未安装？",
+    "expected_sources": ["故障排除.txt", "扫地机器人100问2.txt"],
+    "expected_keywords": ["安装到位", "感应传感器", "扣紧"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "fault_010",
+    "category": "故障排除",
+    "question": "主刷转起来有咔咔声，可能卡了什么？",
+    "expected_sources": ["故障排除.txt"],
+    "expected_keywords": ["硬物", "轴承", "胶条"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "maint_001",
+    "category": "维护保养",
+    "question": "每天使用完以后，机器人外壳应该怎么清洁？",
+    "expected_sources": ["维护保养.txt"],
+    "expected_keywords": ["干软布", "灰尘", "水渍"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "maint_002",
+    "category": "维护保养",
+    "question": "驱动轮和万向轮多久检查一次，毛发怎么处理？",
+    "expected_sources": ["维护保养.txt"],
+    "expected_keywords": ["每日", "镊子", "毛发"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "maint_003",
+    "category": "维护保养",
+    "question": "充电触点怎样保养才能避免接触不良？",
+    "expected_sources": ["维护保养.txt"],
+    "expected_keywords": ["干布", "金属触点", "氧化"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "maint_004",
+    "category": "维护保养",
+    "question": "机器人的散热口应该多久清理，用什么工具？",
+    "expected_sources": ["维护保养.txt"],
+    "expected_keywords": ["每周", "软毛刷", "散热口"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "maint_005",
+    "category": "维护保养",
+    "question": "轮子转轴需要加润滑油吗，多久加一次？",
+    "expected_sources": ["维护保养.txt"],
+    "expected_keywords": ["每月", "润滑油", "转轴"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "maint_006",
+    "category": "维护保养",
+    "question": "机器人很久不用时，为什么不能一直亏电放着？",
+    "expected_sources": ["维护保养.txt", "扫地机器人100问2.txt"],
+    "expected_keywords": ["补电", "电池", "亏电"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "maint_007",
+    "category": "维护保养",
+    "question": "主刷上的毛发每次都很多，保养时应该怎么拆和清？",
+    "expected_sources": ["维护保养.txt", "扫地机器人100问2.txt"],
+    "expected_keywords": ["剪刀", "主刷", "缠绕"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "maint_008",
+    "category": "维护保养",
+    "question": "拖地结束后，水箱里的剩水应该怎么处理？",
+    "expected_sources": ["维护保养.txt"],
+    "expected_keywords": ["排空", "干布", "出水口"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "maint_009",
+    "category": "维护保养",
+    "question": "自动洗拖布的机器每次用完要清理哪些基站部件？",
+    "expected_sources": ["维护保养.txt"],
+    "expected_keywords": ["污水仓", "滤网", "清洁刷"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "maint_010",
+    "category": "维护保养",
+    "question": "水箱里出现水垢后可以怎样定期清理？",
+    "expected_sources": ["维护保养.txt"],
+    "expected_keywords": ["柠檬酸", "1:50", "浸泡"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "buy_001",
+    "category": "选购指南",
+    "question": "80 平以内的小户型，对续航时间有什么最低建议？",
+    "expected_sources": ["选购指南.txt"],
+    "expected_keywords": ["80㎡", "60分钟", "小户型"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "buy_002",
+    "category": "选购指南",
+    "question": "家里有长毛宠物，选扫地机最应该关注哪些能力？",
+    "expected_sources": ["选购指南.txt"],
+    "expected_keywords": ["宠物", "防缠绕", "吸力"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "buy_003",
+    "category": "选购指南",
+    "question": "地毯比较多，吸力至少应该选择多少 Pa？",
+    "expected_sources": ["选购指南.txt"],
+    "expected_keywords": ["地毯", "4000Pa", "吸力"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "buy_004",
+    "category": "选购指南",
+    "question": "复杂户型更适合激光导航还是视觉导航？",
+    "expected_sources": ["选购指南.txt"],
+    "expected_keywords": ["激光导航", "定位精准", "复杂户型"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "buy_005",
+    "category": "选购指南",
+    "question": "床底只有八厘米高，应该买多高的机器人？",
+    "expected_sources": ["选购指南.txt"],
+    "expected_keywords": ["8cm", "7.5cm", "机身高度"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "buy_006",
+    "category": "选购指南",
+    "question": "过敏体质家庭应该选择什么等级的过滤系统？",
+    "expected_sources": ["选购指南.txt"],
+    "expected_keywords": ["HEPA", "H13", "过敏原"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "buy_007",
+    "category": "选购指南",
+    "question": "复式住宅买机器人时，多楼层地图功能要支持几张？",
+    "expected_sources": ["选购指南.txt"],
+    "expected_keywords": ["多楼层地图", "3张", "复式"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "buy_008",
+    "category": "选购指南",
+    "question": "想减少倒垃圾次数，自动集尘袋容量多大比较合适？",
+    "expected_sources": ["选购指南.txt"],
+    "expected_keywords": ["自动集尘", "2.5L", "集尘袋"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "buy_009",
+    "category": "选购指南",
+    "question": "卧室夜间使用，扫地机噪音最好控制在多少分贝？",
+    "expected_sources": ["选购指南.txt"],
+    "expected_keywords": ["55dB", "卧室", "噪音"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": "buy_010",
+    "category": "选购指南",
+    "question": "木地板家庭为什么更适合拖布可抬升、出水可调的机型？",
+    "expected_sources": ["选购指南.txt"],
+    "expected_keywords": ["木地板", "拖布可抬升", "出水量可调"],
+    "min_keyword_matches": 2
+  }
+]

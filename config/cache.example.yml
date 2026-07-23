@@ -1,0 +1,31 @@
+redis_host: localhost
+redis_port: 6379
+redis_password: ""
+redis_db: 0
+redis_timeout: 5
+
+enable_rag_cache: true
+rag_cache_prefix: "agent:rag:"
+rag_cache_ttl: 3600
+
+enable_rag_lock: true
+rag_lock_prefix: "agent:rag:lock:"
+rag_lock_ttl: 30
+rag_lock_wait_timeout: 10
+rag_lock_retry_interval: 0.2
+
+enable_agent_memory: true
+agent_memory_prefix: "agent:memory:"
+agent_memory_ttl: 7200
+
+chat_checkpoint_redis_host: localhost
+chat_checkpoint_redis_port: 6380
+chat_checkpoint_redis_password: ""
+chat_checkpoint_redis_db: 0
+chat_checkpoint_redis_timeout: 5
+
+chat_checkpoint_ttl_minutes: 120
+chat_checkpoint_refresh_on_read: true
+
+chat_checkpoint_prefix: "agent:checkpoint"
+chat_checkpoint_write_prefix: "agent:checkpoint:write"
