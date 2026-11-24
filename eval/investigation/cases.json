@@ -1,0 +1,236 @@
+{
+  "devices": [
+    {"device_id": "A01", "site_id": "A", "model": "DC-120"},
+    {"device_id": "A02", "site_id": "A", "model": "DC-120"},
+    {"device_id": "A03", "site_id": "A", "model": "DC-120"},
+    {"device_id": "A04", "site_id": "A", "model": "DC-120"},
+    {"device_id": "A05", "site_id": "A", "model": "DC-120"},
+    {"device_id": "A06", "site_id": "A", "model": "DC-120"},
+    {"device_id": "A07", "site_id": "A", "model": "DC-120"},
+    {"device_id": "A08", "site_id": "A", "model": "DC-120"},
+    {"device_id": "B01", "site_id": "B", "model": "DC-120"},
+    {"device_id": "B02", "site_id": "B", "model": "DC-120"},
+    {"device_id": "B03", "site_id": "B", "model": "DC-120"},
+    {"device_id": "B04", "site_id": "B", "model": "DC-120"},
+    {"device_id": "B05", "site_id": "B", "model": "DC-120"},
+    {"device_id": "B06", "site_id": "B", "model": "DC-120"},
+    {"device_id": "B07", "site_id": "B", "model": "DC-120"},
+    {"device_id": "B08", "site_id": "B", "model": "DC-120"}
+  ],
+  "cases": {
+    "firmware": {
+      "scope": {
+        "site_ids": ["A", "B"],
+        "start": "2026-11-21T14:00:00Z",
+        "end": "2026-11-22T00:00:00Z",
+        "firmware_source": "available"
+      },
+      "target_version": "2.4.0",
+      "alarm_events": [
+        {"event_id": "fw-alarm-01", "device_id": "A01", "event_type": "offline", "occurred_at": "2026-11-21T14:06:00Z"},
+        {"event_id": "fw-alarm-02", "device_id": "A02", "event_type": "offline", "occurred_at": "2026-11-21T14:08:00Z"},
+        {"event_id": "fw-alarm-03", "device_id": "B01", "event_type": "offline", "occurred_at": "2026-11-21T14:11:00Z"},
+        {"event_id": "fw-alarm-04", "device_id": "A01", "event_type": "offline", "occurred_at": "2026-11-21T14:13:00Z"},
+        {"event_id": "fw-alarm-05", "device_id": "B02", "event_type": "offline", "occurred_at": "2026-11-21T14:15:00Z"},
+        {"event_id": "fw-alarm-06", "device_id": "A03", "event_type": "offline", "occurred_at": "2026-11-21T14:19:00Z"},
+        {"event_id": "fw-alarm-07", "device_id": "B03", "event_type": "offline", "occurred_at": "2026-11-21T14:23:00Z"},
+        {"event_id": "fw-alarm-08", "device_id": "A05", "event_type": "offline", "occurred_at": "2026-11-21T19:30:00Z"}
+      ],
+      "firmware_rollouts": [
+        {"rollout_id": "fw-rollout-A01", "device_id": "A01", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:30:00Z"},
+        {"rollout_id": "fw-rollout-A02", "device_id": "A02", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:35:00Z"},
+        {"rollout_id": "fw-rollout-A03", "device_id": "A03", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:40:00Z"},
+        {"rollout_id": "fw-rollout-A04", "device_id": "A04", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:45:00Z"},
+        {"rollout_id": "fw-rollout-B01", "device_id": "B01", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T13:10:00Z"},
+        {"rollout_id": "fw-rollout-B02", "device_id": "B02", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T13:15:00Z"},
+        {"rollout_id": "fw-rollout-B03", "device_id": "B03", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T13:20:00Z"},
+        {"rollout_id": "fw-rollout-B04", "device_id": "B04", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T13:25:00Z"}
+      ]
+    },
+    "site": {
+      "scope": {
+        "site_ids": ["A", "B"],
+        "start": "2026-11-21T14:00:00Z",
+        "end": "2026-11-22T00:00:00Z",
+        "firmware_source": "available"
+      },
+      "target_version": "2.4.0",
+      "alarm_events": [
+        {"event_id": "site-alarm-01", "device_id": "A01", "event_type": "offline", "occurred_at": "2026-11-21T14:35:00Z"},
+        {"event_id": "site-alarm-02", "device_id": "A02", "event_type": "offline", "occurred_at": "2026-11-21T14:35:02Z"},
+        {"event_id": "site-alarm-03", "device_id": "A03", "event_type": "offline", "occurred_at": "2026-11-21T14:35:04Z"},
+        {"event_id": "site-alarm-04", "device_id": "A05", "event_type": "offline", "occurred_at": "2026-11-21T14:35:06Z"},
+        {"event_id": "site-alarm-05", "device_id": "A06", "event_type": "offline", "occurred_at": "2026-11-21T14:35:08Z"},
+        {"event_id": "site-alarm-06", "device_id": "A07", "event_type": "offline", "occurred_at": "2026-11-21T14:35:10Z"}
+      ],
+      "firmware_rollouts": [
+        {"rollout_id": "site-rollout-A01", "device_id": "A01", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:30:00Z"},
+        {"rollout_id": "site-rollout-A02", "device_id": "A02", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:35:00Z"},
+        {"rollout_id": "site-rollout-A03", "device_id": "A03", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:40:00Z"},
+        {"rollout_id": "site-rollout-A04", "device_id": "A04", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:45:00Z"},
+        {"rollout_id": "site-rollout-B01", "device_id": "B01", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T13:10:00Z"},
+        {"rollout_id": "site-rollout-B02", "device_id": "B02", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T13:15:00Z"},
+        {"rollout_id": "site-rollout-B03", "device_id": "B03", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T13:20:00Z"},
+        {"rollout_id": "site-rollout-B04", "device_id": "B04", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T13:25:00Z"}
+      ]
+    },
+    "missing": {
+      "scope": {
+        "site_ids": ["A", "B"],
+        "start": "2026-11-21T14:00:00Z",
+        "end": "2026-11-22T00:00:00Z",
+        "firmware_source": "unavailable",
+        "firmware_source_reason": "模拟固件发布服务不可用，缺少调查开始前两小时的设备升级记录。"
+      },
+      "target_version": "2.4.0",
+      "alarm_events": [
+        {"event_id": "missing-alarm-01", "device_id": "A01", "event_type": "offline", "occurred_at": "2026-11-21T14:07:00Z"},
+        {"event_id": "missing-alarm-02", "device_id": "A03", "event_type": "offline", "occurred_at": "2026-11-21T14:15:00Z"},
+        {"event_id": "missing-alarm-03", "device_id": "B03", "event_type": "offline", "occurred_at": "2026-11-21T14:21:00Z"},
+        {"event_id": "missing-alarm-04", "device_id": "B05", "event_type": "offline", "occurred_at": "2026-11-21T14:31:00Z"},
+        {"event_id": "missing-alarm-05", "device_id": "A06", "event_type": "offline", "occurred_at": "2026-11-21T15:15:00Z"}
+      ],
+      "firmware_rollouts": []
+    },
+    "upgraded_no_offline": {
+      "scope": {
+        "site_ids": ["A", "B"],
+        "start": "2026-11-21T14:00:00Z",
+        "end": "2026-11-22T00:00:00Z",
+        "firmware_source": "available"
+      },
+      "target_version": "2.4.0",
+      "alarm_events": [],
+      "firmware_rollouts": [
+        {"rollout_id": "quiet-rollout-A01", "device_id": "A01", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:30:00Z"},
+        {"rollout_id": "quiet-rollout-A02", "device_id": "A02", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:35:00Z"},
+        {"rollout_id": "quiet-rollout-A03", "device_id": "A03", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:40:00Z"},
+        {"rollout_id": "quiet-rollout-A04", "device_id": "A04", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:45:00Z"},
+        {"rollout_id": "quiet-rollout-B01", "device_id": "B01", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T13:10:00Z"},
+        {"rollout_id": "quiet-rollout-B02", "device_id": "B02", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T13:15:00Z"},
+        {"rollout_id": "quiet-rollout-B03", "device_id": "B03", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T13:20:00Z"},
+        {"rollout_id": "quiet-rollout-B04", "device_id": "B04", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T13:25:00Z"}
+      ]
+    },
+    "available_no_rollouts": {
+      "scope": {
+        "site_ids": ["A", "B"],
+        "start": "2026-11-21T14:00:00Z",
+        "end": "2026-11-22T00:00:00Z",
+        "firmware_source": "available"
+      },
+      "target_version": "2.4.0",
+      "alarm_events": [
+        {"event_id": "empty-alarm-01", "device_id": "A01", "event_type": "offline", "occurred_at": "2026-11-21T14:35:00Z"},
+        {"event_id": "empty-alarm-02", "device_id": "A02", "event_type": "offline", "occurred_at": "2026-11-21T14:36:00Z"},
+        {"event_id": "empty-alarm-03", "device_id": "A05", "event_type": "offline", "occurred_at": "2026-11-21T14:37:00Z"},
+        {"event_id": "empty-alarm-04", "device_id": "A06", "event_type": "offline", "occurred_at": "2026-11-21T14:38:00Z"}
+      ],
+      "firmware_rollouts": []
+    },
+    "equal_rates": {
+      "scope": {
+        "site_ids": ["A", "B"],
+        "start": "2026-11-21T14:00:00Z",
+        "end": "2026-11-22T00:00:00Z",
+        "firmware_source": "available"
+      },
+      "target_version": "2.4.0",
+      "alarm_events": [
+        {"event_id": "equal-alarm-01", "device_id": "A01", "event_type": "offline", "occurred_at": "2026-11-21T14:35:00Z"},
+        {"event_id": "equal-alarm-02", "device_id": "B01", "event_type": "offline", "occurred_at": "2026-11-21T14:36:00Z"},
+        {"event_id": "equal-alarm-03", "device_id": "A05", "event_type": "offline", "occurred_at": "2026-11-21T14:37:00Z"},
+        {"event_id": "equal-alarm-04", "device_id": "B05", "event_type": "offline", "occurred_at": "2026-11-21T14:38:00Z"}
+      ],
+      "firmware_rollouts": [
+        {"rollout_id": "equal-rollout-A01", "device_id": "A01", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:30:00Z"},
+        {"rollout_id": "equal-rollout-A02", "device_id": "A02", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:35:00Z"},
+        {"rollout_id": "equal-rollout-A03", "device_id": "A03", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:40:00Z"},
+        {"rollout_id": "equal-rollout-A04", "device_id": "A04", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:45:00Z"},
+        {"rollout_id": "equal-rollout-B01", "device_id": "B01", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T13:10:00Z"},
+        {"rollout_id": "equal-rollout-B02", "device_id": "B02", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T13:15:00Z"},
+        {"rollout_id": "equal-rollout-B03", "device_id": "B03", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T13:20:00Z"},
+        {"rollout_id": "equal-rollout-B04", "device_id": "B04", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T13:25:00Z"}
+      ]
+    },
+    "rollout_site_overlap": {
+      "scope": {
+        "site_ids": ["A", "B"],
+        "start": "2026-11-21T14:00:00Z",
+        "end": "2026-11-22T00:00:00Z",
+        "firmware_source": "available"
+      },
+      "target_version": "2.4.0",
+      "devices": [
+        {"device_id": "A01", "site_id": "A", "model": "DC-120"},
+        {"device_id": "A02", "site_id": "A", "model": "DC-120"},
+        {"device_id": "A03", "site_id": "A", "model": "DC-120"},
+        {"device_id": "A04", "site_id": "A", "model": "DC-120"},
+        {"device_id": "A05", "site_id": "A", "model": "DC-120"},
+        {"device_id": "A06", "site_id": "A", "model": "DC-120"},
+        {"device_id": "A07", "site_id": "A", "model": "DC-120"},
+        {"device_id": "A08", "site_id": "A", "model": "DC-120"},
+        {"device_id": "A09", "site_id": "A", "model": "DC-120"},
+        {"device_id": "A10", "site_id": "A", "model": "DC-120"},
+        {"device_id": "A11", "site_id": "A", "model": "DC-120"},
+        {"device_id": "A12", "site_id": "A", "model": "DC-120"},
+        {"device_id": "A13", "site_id": "A", "model": "DC-120"},
+        {"device_id": "A14", "site_id": "A", "model": "DC-120"},
+        {"device_id": "A15", "site_id": "A", "model": "DC-120"},
+        {"device_id": "B01", "site_id": "B", "model": "DC-120"},
+        {"device_id": "B02", "site_id": "B", "model": "DC-120"},
+        {"device_id": "B03", "site_id": "B", "model": "DC-120"},
+        {"device_id": "B04", "site_id": "B", "model": "DC-120"},
+        {"device_id": "B05", "site_id": "B", "model": "DC-120"},
+        {"device_id": "B06", "site_id": "B", "model": "DC-120"},
+        {"device_id": "B07", "site_id": "B", "model": "DC-120"},
+        {"device_id": "B08", "site_id": "B", "model": "DC-120"},
+        {"device_id": "B09", "site_id": "B", "model": "DC-120"},
+        {"device_id": "B10", "site_id": "B", "model": "DC-120"},
+        {"device_id": "B11", "site_id": "B", "model": "DC-120"},
+        {"device_id": "B12", "site_id": "B", "model": "DC-120"},
+        {"device_id": "B13", "site_id": "B", "model": "DC-120"},
+        {"device_id": "B14", "site_id": "B", "model": "DC-120"},
+        {"device_id": "B15", "site_id": "B", "model": "DC-120"}
+      ],
+      "alarm_events": [
+        {"event_id": "overlap-alarm-A01", "device_id": "A01", "event_type": "offline", "occurred_at": "2026-11-21T14:05:00Z"},
+        {"event_id": "overlap-alarm-A02", "device_id": "A02", "event_type": "offline", "occurred_at": "2026-11-21T14:05:15Z"},
+        {"event_id": "overlap-alarm-A03", "device_id": "A03", "event_type": "offline", "occurred_at": "2026-11-21T14:05:30Z"},
+        {"event_id": "overlap-alarm-A04", "device_id": "A04", "event_type": "offline", "occurred_at": "2026-11-21T14:06:00Z"},
+        {"event_id": "overlap-alarm-A05", "device_id": "A05", "event_type": "offline", "occurred_at": "2026-11-21T14:06:15Z"},
+        {"event_id": "overlap-alarm-A06", "device_id": "A06", "event_type": "offline", "occurred_at": "2026-11-21T14:06:30Z"},
+        {"event_id": "overlap-alarm-A07", "device_id": "A07", "event_type": "offline", "occurred_at": "2026-11-21T14:07:00Z"},
+        {"event_id": "overlap-alarm-A08", "device_id": "A08", "event_type": "offline", "occurred_at": "2026-11-21T14:07:15Z"},
+        {"event_id": "overlap-alarm-A11", "device_id": "A11", "event_type": "offline", "occurred_at": "2026-11-21T14:07:30Z"},
+        {"event_id": "overlap-alarm-A12", "device_id": "A12", "event_type": "offline", "occurred_at": "2026-11-21T14:08:00Z"},
+        {"event_id": "overlap-alarm-A13", "device_id": "A13", "event_type": "offline", "occurred_at": "2026-11-21T14:08:15Z"},
+        {"event_id": "overlap-alarm-A14", "device_id": "A14", "event_type": "offline", "occurred_at": "2026-11-21T14:08:30Z"},
+        {"event_id": "overlap-alarm-B01", "device_id": "B01", "event_type": "offline", "occurred_at": "2026-11-21T14:15:00Z"},
+        {"event_id": "overlap-alarm-B06", "device_id": "B06", "event_type": "offline", "occurred_at": "2026-11-21T14:16:00Z"},
+        {"event_id": "overlap-alarm-B07", "device_id": "B07", "event_type": "offline", "occurred_at": "2026-11-21T14:17:00Z"},
+        {"event_id": "overlap-alarm-A01-repeat", "device_id": "A01", "event_type": "offline", "occurred_at": "2026-11-21T14:20:00Z"}
+      ],
+      "firmware_rollouts": [
+        {"rollout_id": "overlap-rollout-A01", "device_id": "A01", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:30:00Z"},
+        {"rollout_id": "overlap-rollout-A02", "device_id": "A02", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:32:00Z"},
+        {"rollout_id": "overlap-rollout-A03", "device_id": "A03", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:34:00Z"},
+        {"rollout_id": "overlap-rollout-A04", "device_id": "A04", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:36:00Z"},
+        {"rollout_id": "overlap-rollout-A05", "device_id": "A05", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:38:00Z"},
+        {"rollout_id": "overlap-rollout-A06", "device_id": "A06", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:40:00Z"},
+        {"rollout_id": "overlap-rollout-A07", "device_id": "A07", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:42:00Z"},
+        {"rollout_id": "overlap-rollout-A08", "device_id": "A08", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:44:00Z"},
+        {"rollout_id": "overlap-rollout-A09", "device_id": "A09", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:46:00Z"},
+        {"rollout_id": "overlap-rollout-A10", "device_id": "A10", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T12:48:00Z"},
+        {"rollout_id": "overlap-rollout-B01", "device_id": "B01", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T13:10:00Z"},
+        {"rollout_id": "overlap-rollout-B02", "device_id": "B02", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T13:13:00Z"},
+        {"rollout_id": "overlap-rollout-B03", "device_id": "B03", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T13:16:00Z"},
+        {"rollout_id": "overlap-rollout-B04", "device_id": "B04", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T13:19:00Z"},
+        {"rollout_id": "overlap-rollout-B05", "device_id": "B05", "from_version": "2.3.1", "to_version": "2.4.0", "completed_at": "2026-11-21T13:22:00Z"}
+      ],
+      "site_events": [
+        {"event_id": "gw-A-01", "site_id": "A", "event_type": "gateway_restart", "occurred_at": "2026-11-21T14:03:00Z"}
+      ]
+    }
+  }
+}

@@ -15,6 +15,10 @@ def _builtin(name):
         from service.billing.db import get_billing_engine
 
         return BillingDisputeHandler(get_billing_engine())
+    if name == "outage_investigation":
+        from .outage.handler import OutageInvestigationHandler
+
+        return OutageInvestigationHandler()
     raise KeyError(name)
 
 
@@ -26,5 +30,5 @@ def additional_handlers() -> list[CaseHandler]:
     return [
         h
         for k, h in _handlers.items()
-        if k != "billing_dispute"
+        if k not in ("billing_dispute", "outage_investigation")
     ]

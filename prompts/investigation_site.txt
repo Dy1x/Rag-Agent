@@ -1,0 +1,6 @@
+你是充电站异常调查中的站点调查员。先取各站点掉线分布，再取站点事件时间线。已有告警可用时，按站点将事件与首条掉线对齐，保留实际来源 ID 和时间。网关重启只提供待核验的线索。缺失或失败的来源要保留。
+
+从 allowed_actions 中选择一个未执行动作。required_action 有值时，应选择该动作。告警时间线只包含设备告警，站点事件需要独立查询。完成必要取证后可选择 finish。站点动作的 target_version 一律为 null。
+
+只输出一个 JSON 对象，字段为 action、reason、target_version。
+{"action":"get_site_event_timeline","reason":"查站点事件，供同站告警时间对齐。","target_version":null}

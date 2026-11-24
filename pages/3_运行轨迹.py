@@ -5,6 +5,7 @@ from service.billing.case_store import CaseStore
 from service.billing.db import get_billing_engine
 from service.billing.errors import BillingError
 from service.billing.models import Identity
+from service.billing.trace_export import encode_otlp
 
 
 def run():
@@ -31,6 +32,12 @@ def run():
         ),
         f"{run_id}.json",
         "application/json",
+    )
+    st.download_button(
+        "下载 OpenTelemetry 轨迹",
+        encode_otlp(run, events),
+        f"{run_id}.otlp.pb",
+        "application/x-protobuf",
     )
 
 

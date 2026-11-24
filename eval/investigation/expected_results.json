@@ -1,0 +1,93 @@
+{
+  "device_ids": ["A01", "A02", "A03", "A04", "A05", "A06", "A07", "A08", "B01", "B02", "B03", "B04", "B05", "B06", "B07", "B08"],
+  "cases": {
+    "firmware": {
+      "direction": "firmware",
+      "key_numbers": {
+        "impact": [7, 16],
+        "offline_events": 8,
+        "rollouts": 8,
+        "firmware_cohorts": {"target_version": "2.4.0", "target": [6, 8], "control": [1, 8], "offline_rate_difference": 0.625}
+      },
+      "source_ids": {
+        "alarm_events": ["fw-alarm-01", "fw-alarm-02", "fw-alarm-03", "fw-alarm-04", "fw-alarm-05", "fw-alarm-06", "fw-alarm-07", "fw-alarm-08"],
+        "firmware_rollouts": ["fw-rollout-A01", "fw-rollout-A02", "fw-rollout-A03", "fw-rollout-A04", "fw-rollout-B01", "fw-rollout-B02", "fw-rollout-B03", "fw-rollout-B04"]
+      },
+      "firmware_source_status": "available",
+      "required_gaps": {"device_diagnostics": "not_collected", "site_network_power_logs": "not_collected"}
+    },
+    "site": {
+      "direction": "site",
+      "key_numbers": {
+        "impact": [6, 16],
+        "offline_events": 6,
+        "rollouts": 8,
+        "sites": {"A": [6, 8], "B": [0, 8]}
+      },
+      "source_ids": {
+        "alarm_events": ["site-alarm-01", "site-alarm-02", "site-alarm-03", "site-alarm-04", "site-alarm-05", "site-alarm-06"],
+        "firmware_rollouts": ["site-rollout-A01", "site-rollout-A02", "site-rollout-A03", "site-rollout-A04", "site-rollout-B01", "site-rollout-B02", "site-rollout-B03", "site-rollout-B04"]
+      },
+      "firmware_source_status": "available",
+      "required_gaps": {"site_network_power_logs": "not_collected"}
+    },
+    "missing": {
+      "direction": "site",
+      "key_numbers": {
+        "impact": [5, 16],
+        "offline_events": 5,
+        "rollouts": null,
+        "firmware_cohorts": null,
+        "sites": {"A": [3, 8], "B": [2, 8]}
+      },
+      "source_ids": {
+        "alarm_events": ["missing-alarm-01", "missing-alarm-02", "missing-alarm-03", "missing-alarm-04", "missing-alarm-05"],
+        "firmware_rollouts": []
+      },
+      "firmware_source_status": "unavailable",
+      "required_gaps": {"firmware_rollouts": "unavailable", "site_network_power_logs": "not_collected"}
+    },
+    "upgraded_no_offline": {
+      "direction": "none",
+      "key_numbers": {"impact": [0, 16], "offline_events": 0, "rollouts": 8},
+      "source_ids": {
+        "alarm_events": [],
+        "firmware_rollouts": ["quiet-rollout-A01", "quiet-rollout-A02", "quiet-rollout-A03", "quiet-rollout-A04", "quiet-rollout-B01", "quiet-rollout-B02", "quiet-rollout-B03", "quiet-rollout-B04"]
+      },
+      "firmware_source_status": "available",
+      "required_gaps": {}
+    },
+    "available_no_rollouts": {
+      "direction": "site",
+      "key_numbers": {
+        "impact": [4, 16],
+        "offline_events": 4,
+        "rollouts": 0,
+        "firmware_cohorts": null,
+        "sites": {"A": [4, 8], "B": [0, 8]}
+      },
+      "source_ids": {
+        "alarm_events": ["empty-alarm-01", "empty-alarm-02", "empty-alarm-03", "empty-alarm-04"],
+        "firmware_rollouts": []
+      },
+      "firmware_source_status": "available",
+      "required_gaps": {"firmware_rollouts": "no_records", "site_network_power_logs": "not_collected"}
+    },
+    "equal_rates": {
+      "direction": "undetermined",
+      "key_numbers": {
+        "impact": [4, 16],
+        "offline_events": 4,
+        "rollouts": 8,
+        "firmware_cohorts": {"target_version": "2.4.0", "target": [2, 8], "control": [2, 8], "offline_rate_difference": 0.0},
+        "sites": {"A": [2, 8], "B": [2, 8]}
+      },
+      "source_ids": {
+        "alarm_events": ["equal-alarm-01", "equal-alarm-02", "equal-alarm-03", "equal-alarm-04"],
+        "firmware_rollouts": ["equal-rollout-A01", "equal-rollout-A02", "equal-rollout-A03", "equal-rollout-A04", "equal-rollout-B01", "equal-rollout-B02", "equal-rollout-B03", "equal-rollout-B04"]
+      },
+      "firmware_source_status": "available",
+      "required_gaps": {"device_diagnostics": "not_collected", "site_network_power_logs": "not_collected"}
+    }
+  }
+}

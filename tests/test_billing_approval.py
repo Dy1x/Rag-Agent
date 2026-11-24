@@ -105,5 +105,5 @@ assert h.resume(r,d).report['action_results'][0]['amount_fen']==200
             self.assertTrue(any("resume" in e.label for e in trace.expander))
             self.assertEqual(
                 [button.label for button in trace.get("download_button")],
-                ["下载 JSON"],
+                ["下载 JSON", "下载 OpenTelemetry 轨迹"],
             )

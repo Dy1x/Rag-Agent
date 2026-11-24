@@ -1,0 +1,1 @@
+"""Outage investigation case adapter."""

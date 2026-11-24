@@ -1,0 +1,39 @@
+{
+  "rollout_site_overlap": {
+    "device_ids": [
+      "A01", "A02", "A03", "A04", "A05", "A06", "A07", "A08", "A09", "A10", "A11", "A12", "A13", "A14", "A15",
+      "B01", "B02", "B03", "B04", "B05", "B06", "B07", "B08", "B09", "B10", "B11", "B12", "B13", "B14", "B15"
+    ],
+    "direction": "site",
+    "priority_site_id": "A",
+    "key_numbers": {
+      "impact": [15, 30],
+      "offline_events": 16,
+      "rollouts": 15,
+      "firmware_cohorts": {"target_version": "2.4.0", "target": [9, 15], "control": [6, 15], "offline_rate_difference": 0.2},
+      "sites": {"A": [12, 15], "B": [3, 15]},
+      "firmware_by_site": {
+        "A": {"target": [8, 10], "control": [4, 5], "offline_rate_difference": 0},
+        "B": {"target": [1, 5], "control": [2, 10], "offline_rate_difference": 0}
+      },
+      "gateway": {"site_id": "A", "site_event_id": "gw-A-01", "first_offline_event_id": "overlap-alarm-A01", "lead_seconds": 120}
+    },
+    "source_ids": {
+      "alarm_events": [
+        "overlap-alarm-A01", "overlap-alarm-A01-repeat", "overlap-alarm-A02", "overlap-alarm-A03",
+        "overlap-alarm-A04", "overlap-alarm-A05", "overlap-alarm-A06", "overlap-alarm-A07", "overlap-alarm-A08",
+        "overlap-alarm-A11", "overlap-alarm-A12", "overlap-alarm-A13", "overlap-alarm-A14",
+        "overlap-alarm-B01", "overlap-alarm-B06", "overlap-alarm-B07"
+      ],
+      "firmware_rollouts": [
+        "overlap-rollout-A01", "overlap-rollout-A02", "overlap-rollout-A03", "overlap-rollout-A04",
+        "overlap-rollout-A05", "overlap-rollout-A06", "overlap-rollout-A07", "overlap-rollout-A08",
+        "overlap-rollout-A09", "overlap-rollout-A10", "overlap-rollout-B01", "overlap-rollout-B02",
+        "overlap-rollout-B03", "overlap-rollout-B04", "overlap-rollout-B05"
+      ],
+      "site_events": ["gw-A-01"]
+    },
+    "firmware_source_status": "available",
+    "required_gaps": {"site_network_power_logs": "not_collected"}
+  }
+}

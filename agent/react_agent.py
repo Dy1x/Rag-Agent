@@ -15,6 +15,7 @@ from agent.tools.agent_tools import (
     rag_summerize,
     save_memory_context,
 )
+from agent.tools.investigation_tools import investigate_outage
 from agent.tools.case_tools import case_tools
 from agent.tools.middleware import (
     initialize_rag_budget,
@@ -71,6 +72,7 @@ class ReactAgent:
             ),
             tools=[
                 rag_summerize,
+                investigate_outage,
                 *case_tools(),
                 get_memory_context,
                 save_memory_context,
