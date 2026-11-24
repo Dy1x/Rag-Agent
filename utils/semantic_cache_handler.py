@@ -7,7 +7,7 @@ from typing import Any
 from langchain_chroma import Chroma
 from langchain_core.documents import Document
 
-from model.factory import embed_model
+from model.factory import get_embed_model
 from utils.config_handler import semantic_cache_conf
 from utils.logger_handler import logger
 from utils.path_tool import get_abs_path
@@ -44,6 +44,7 @@ class SemanticCache:
         candidate_threshold: float | None = None,
         candidate_top_k: int | None = None,
         candidate_fetch_k: int | None = None,
+        metadata_filter: dict[str, Any] | None = None,
     ):
         self.enable = bool(
             semantic_cache_conf.get(
@@ -51,6 +52,7 @@ class SemanticCache:
                 True,
             )
         )
+        self.metadata_filter = metadata_filter
 
         # 兼容旧版search()直接命中的严格阈值。
         self.threshold = float(
@@ -141,7 +143,7 @@ class SemanticCache:
 
         self.vector_store = Chroma(
             collection_name=self.collection_name,
-            embedding_function=embed_model,
+            embedding_function=get_embed_model(),
             persist_directory=str(configured_directory),
         )
 
@@ -328,6 +330,7 @@ class SemanticCache:
                 .similarity_search_with_relevance_scores(
                     query,
                     k=fetch_k,
+                    filter=self.metadata_filter,
                 )
             )
 

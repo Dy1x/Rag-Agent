@@ -11,36 +11,18 @@ from langchain_core.runnables import (
 
 from agent.tools.agent_tools import (
     clear_memory_context,
-    fetch_external_data,
-    fill_context_for_report,
-    get_cleaning_records_from_db,
-    get_current_month,
     get_memory_context,
-    get_monthly_report_data_from_db,
-    get_user_devices_from_db,
-    get_user_id,
-    get_user_location,
-    get_user_profile_from_db,
-    get_weather,
     rag_summerize,
     save_memory_context,
 )
-from agent.tools.mcp_db_tools import (
-    get_cleaning_records_from_mcp,
-    get_monthly_report_data_from_mcp,
-    get_user_devices_from_mcp,
-    get_user_profile_from_mcp,
-)
 from agent.tools.middleware import (
+    initialize_rag_budget,
     log_before_model,
     monitor_tool,
-    report_prompt_switch,
     trim_conversation_history,
 )
-from model.factory import chat_model
-from utils.chat_checkpointer import (
-    chat_checkpointer,
-)
+from model.factory import get_chat_model
+from utils.chat_checkpointer import get_chat_checkpointer
 from utils.prompt_loader import (
     load_system_prompts,
 )
@@ -52,7 +34,7 @@ from utils.session_context import (
 
 class ReactAgent:
     """
-    机器人智能客服Agent。
+    新能源充电桩智能客服 Agent。
 
     session_id同时作为：
 
@@ -79,39 +61,28 @@ class ReactAgent:
 
         self.session_id = session_id
 
+        model = get_chat_model()
+        self.checkpointer = get_chat_checkpointer()
         self.agent = create_agent(
-            model=chat_model,
+            model=model,
             system_prompt=(
                 load_system_prompts()
             ),
             tools=[
                 rag_summerize,
-                get_weather,
-                get_user_location,
-                get_user_id,
-                get_current_month,
-                fetch_external_data,
-                fill_context_for_report,
-                get_user_profile_from_db,
-                get_user_devices_from_db,
-                get_cleaning_records_from_db,
-                get_monthly_report_data_from_db,
                 get_memory_context,
                 save_memory_context,
                 clear_memory_context,
-                get_user_profile_from_mcp,
-                get_user_devices_from_mcp,
-                get_cleaning_records_from_mcp,
-                get_monthly_report_data_from_mcp,
             ],
             middleware=[
+                initialize_rag_budget,
                 # 先裁剪，再记录裁剪后的消息数量
                 trim_conversation_history,
                 monitor_tool,
                 log_before_model,
-                report_prompt_switch,
             ],
-            checkpointer=chat_checkpointer,
+            checkpointer=self.checkpointer,
+            context_schema=dict,
         )
 
     def get_checkpoint_config(
@@ -162,7 +133,6 @@ class ReactAgent:
         }
 
         runtime_context = {
-            "report": False,
             "session_id": self.session_id,
         }
 
@@ -258,7 +228,7 @@ class ReactAgent:
         """
 
         checkpoint = (
-            chat_checkpointer.get(
+            self.checkpointer.get(
                 self.get_checkpoint_config()
             )
         )
@@ -330,7 +300,7 @@ class ReactAgent:
         删除当前thread_id的Redis Checkpoint。
         """
 
-        chat_checkpointer.delete_thread(
+        self.checkpointer.delete_thread(
             self.session_id
         )
 

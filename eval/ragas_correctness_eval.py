@@ -6,7 +6,7 @@ from ragas import evaluate
 from ragas.metrics import answer_correctness, context_recall
 
 from rag.rag_service import RagSummerizeService
-from model.factory import chat_model, embed_model
+from model.factory import get_chat_model, get_embed_model
 
 
 BASE_DIR = Path(__file__).parent
@@ -61,8 +61,8 @@ def main():
             answer_correctness,
             context_recall,
         ],
-        llm=chat_model,
-        embeddings=embed_model,
+        llm=get_chat_model(),
+        embeddings=get_embed_model(),
     )
 
     print(result)

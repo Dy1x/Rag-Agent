@@ -1,7 +1,10 @@
 import os
-from utils.logger_handler import logger
+
+from langchain.tools import ToolRuntime
 from langchain_core.tools import tool
+
 from utils.config_handler import agent_conf
+from utils.logger_handler import logger
 from utils.path_tool import get_abs_path
 from rag.rag_service import RagSummerizeService
 from service.user_data_service import (
@@ -24,9 +27,18 @@ external_data = {}
 agent_memory = AgentMemory()
 DEFAULT_SESSION_ID = "default-session"
 
-@tool(description="从向量存储中检索参考资料")
-def rag_summerize(query: str) -> str:
-    return rag.rag_summerize(query)
+@tool(description=(
+    "回答新能源充电桩知识库问题，返回带出处的答案、需要用户补充的问题或证据不足说明。"
+    "query 须保留问题及已知型号、条件和限制。"
+))
+def rag_summerize(query: str, runtime: ToolRuntime[dict | None] = None) -> str:
+    if runtime is None:
+        return rag.rag_summerize(query)
+
+    budget = (runtime.context or {}).get("rag_budget")
+    if budget is None:
+        return "知识库请求上下文未初始化，无法检索资料。"
+    return rag.rag_summerize(query, budget=budget)
 
 
 @tool(description="获取指定城市的天气，以消息字符串的形式返回")
@@ -176,7 +188,7 @@ def get_monthly_report_data_from_db(user_id: str, month: str) -> str:
         "data": data
     })
 
-@tool(description="读取当前会话中的Agent短期记忆，包括user_id、city、month、device_id、last_intent等上下文信息。当用户问题中缺少用户ID、城市或月份时，应优先调用该工具查看是否已有记忆。")
+@tool(description="当用户引用先前保存的设备、地点或咨询意图时，读取当前会话记忆。费用案件的车主身份由服务端提供。")
 def get_memory_context() -> str:
     session_id = get_current_session_id()
     memory = agent_memory.get_memory(session_id)
@@ -187,7 +199,7 @@ def get_memory_context() -> str:
         "data": memory,
     })
 
-@tool(description="保存或更新当前会话中的Agent短期记忆。可保存user_id、city、month、device_id、last_intent等字段。当用户明确提供用户ID、城市、月份或设备信息时，应调用该工具写入记忆。")
+@tool(description="按用户要求保存当前会话的上下文，例如充电设备编号、城市或咨询意图。")
 def save_memory_context(
     user_id: str | None = None,
     city: str | None = None,

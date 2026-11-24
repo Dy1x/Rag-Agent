@@ -1,5 +1,6 @@
 import os
 from abc import ABC, abstractmethod
+from functools import cache
 from typing import Optional
 
 from langchain_community.embeddings import DashScopeEmbeddings
@@ -17,21 +18,25 @@ class BaseModelFactory(ABC):
 
 
 class ChatModelFactory(BaseModelFactory):
-    """
-    创建聊天模型。
-
-    qwen3.7-plus 通过阿里云百炼的 OpenAI 兼容接口调用，
-    不再使用 ChatTongyi。
-    """
+    """通过 provider 的 OpenAI 兼容接口创建聊天模型。"""
 
     def generate(self) -> BaseChatModel:
-        api_key = os.getenv("DASHSCOPE_API_KEY")
+        provider = rag_conf.get("chat_model_provider", "qwen")
+        key_names = {"deepseek": "DEEPSEEK_API_KEY", "qwen": "DASHSCOPE_API_KEY"}
+        if provider not in key_names:
+            raise ValueError(f"不支持的聊天模型 provider：{provider}")
 
+        key_name = key_names[provider]
+        api_key = os.getenv(key_name)
         if not api_key:
-            raise RuntimeError(
-                "没有读取到 DASHSCOPE_API_KEY，"
-                "请先配置阿里云百炼 API Key。"
-            )
+            raise RuntimeError(f"请设置 {key_name} 环境变量。")
+
+        # 使用非思考模式，兼容通过 ChatOpenAI 往返传递工具调用。
+        options = (
+            {"extra_body": {"thinking": {"type": "disabled"}}}
+            if provider == "deepseek"
+            else {}
+        )
 
         return ChatOpenAI(
             model=rag_conf["chat_model_name"],
@@ -40,6 +45,7 @@ class ChatModelFactory(BaseModelFactory):
             temperature=0,
             timeout=60,
             max_retries=2,
+            **options,
         )
 
 
@@ -57,5 +63,11 @@ class EmbeddingsFactory(BaseModelFactory):
         )
 
 
-chat_model = ChatModelFactory().generate()
-embed_model = EmbeddingsFactory().generate()
+@cache
+def get_chat_model() -> BaseChatModel:
+    return ChatModelFactory().generate()
+
+
+@cache
+def get_embed_model() -> Embeddings:
+    return EmbeddingsFactory().generate()

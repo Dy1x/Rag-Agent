@@ -7,6 +7,8 @@ ShallowRedisSaver只保存每个thread_id的最新状态，
 最近10轮消息由middleware.py负责控制。
 """
 
+from functools import cache
+
 from langgraph.checkpoint.redis.shallow import (
     ShallowRedisSaver,
 )
@@ -161,6 +163,10 @@ def create_chat_checkpointer(
         ) from error
 
 
-chat_checkpointer = (
-    create_chat_checkpointer()
-)
+get_chat_checkpointer = cache(create_chat_checkpointer)
+
+
+def __getattr__(name: str):
+    if name == "chat_checkpointer":
+        return get_chat_checkpointer()
+    raise AttributeError(name)

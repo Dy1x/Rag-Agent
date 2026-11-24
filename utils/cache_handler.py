@@ -7,9 +7,10 @@ from utils.logger_handler import logger
 
 
 class RedisCache:
-    def __init__(self):
+    def __init__(self, namespace: str = ""):
         self.enable = cache_conf.get("enable_rag_cache", True)
-        self.prefix = cache_conf.get("rag_cache_prefix", "agent:rag:")
+        suffix = f"{namespace}:" if namespace else ""
+        self.prefix = cache_conf.get("rag_cache_prefix", "agent:rag:") + suffix
         self.ttl = cache_conf.get("rag_cache_ttl", 3600)
 
         self.client = redis.Redis(
@@ -21,7 +22,7 @@ class RedisCache:
             decode_responses=True,
         )
         self.lock_enable = cache_conf.get("enable_rag_lock", True)
-        self.lock_prefix = cache_conf.get("rag_lock_prefix", "agent:rag:lock:")
+        self.lock_prefix = cache_conf.get("rag_lock_prefix", "agent:rag:lock:") + suffix
         self.lock_ttl = cache_conf.get("rag_lock_ttl", 30)
         self.lock_wait_timeout = cache_conf.get("rag_lock_wait_timeout", 10)
         self.lock_retry_interval = cache_conf.get("rag_lock_retry_interval", 0.2)

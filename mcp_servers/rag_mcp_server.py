@@ -32,29 +32,26 @@ def doc_to_dict(doc, rank: int) -> dict:
 @mcp.tool()
 def rag_summerize(query: str) -> dict:
     """基于知识库资料回答用户问题。适用于产品故障、维护保养、选购建议等知识库问答。"""
-    if not query:
+    if not query or not query.strip():
         return {
             "found": False,
             "message": "query不能为空",
             "data": None,
         }
 
-    answer = rag_service.rag_summerize(query)
-
-    if not answer:
-        return {
-            "found": False,
-            "message": "RAG未生成答案",
-            "data": None,
-        }
-
-    return {
-        "found": True,
+    result = rag_service.answer_question(query)
+    response = {
+        "found": result.status == "answered",
+        "status": result.status,
         "data": {
             "query": query,
-            "answer": answer,
+            "answer": result.format(),
+            "sources": result.sources,
         },
     }
+    if result.status != "answered":
+        response["message"] = result.text
+    return response
 
 @mcp.tool()
 def retrieve_docs(query: str) -> dict:

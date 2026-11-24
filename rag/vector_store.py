@@ -5,7 +5,7 @@ from langchain_core.documents import Document
 from utils.config_handler import chroma_conf, retrieval_conf
 from utils.path_tool import get_abs_path
 from utils.logger_handler import logger
-from model.factory import embed_model
+from model.factory import get_embed_model
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from utils.file_handler import txt_loader, pdf_loader, listdir_with_allowed_type, get_file_md5_hex
 from utils.document_parser import load_documents_by_type
@@ -15,7 +15,7 @@ class VectorStoreService:
     def __init__(self):
         self.vectors_store = Chroma(
             collection_name=chroma_conf["collection_name"],
-            embedding_function=embed_model,
+            embedding_function=get_embed_model(),
             persist_directory=get_abs_path(chroma_conf["persist_directory"]),
 
         )

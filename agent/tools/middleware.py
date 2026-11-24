@@ -1,18 +1,30 @@
-from typing import Callable,Any
+from typing import Any, Callable
 
-from langchain.agents.middleware import wrap_tool_call,dynamic_prompt,ModelRequest,before_model
-from langchain.tools.tool_node import ToolCallRequest
-from langchain_core.messages import ToolMessage,HumanMessage,RemoveMessage,SystemMessage
-from langgraph.graph.message import REMOVE_ALL_MESSAGES
-from langgraph.types import Command
-from langgraph.runtime import Runtime
 from langchain.agents import AgentState
+from langchain.agents.middleware import (
+    ModelRequest, before_agent, before_model, dynamic_prompt, wrap_tool_call,
+)
+from langchain.tools.tool_node import ToolCallRequest
+from langchain_core.messages import HumanMessage, RemoveMessage, SystemMessage, ToolMessage
+from langgraph.graph.message import REMOVE_ALL_MESSAGES
+from langgraph.runtime import Runtime
+from langgraph.types import Command
+
+from rag.evidence import RetrievalBudget
 from utils.logger_handler import logger
-from utils.prompt_loader import load_system_prompts,load_report_prompts
+from utils.prompt_loader import load_report_prompts, load_system_prompts
 
 
 # Agent 最多保留最近 10 个用户对话轮次
 MAX_CONVERSATION_ROUNDS = 10
+
+
+@before_agent
+def initialize_rag_budget(state: AgentState, runtime: Runtime) -> None:
+    # 工具并行共享运行上下文。预算对象无需写进消息状态或 Redis。
+    if runtime.context is not None:
+        runtime.context["rag_budget"] = RetrievalBudget()
+
 
 @wrap_tool_call
 def monitor_tool(
@@ -147,7 +159,7 @@ def report_prompt_switch(request: ModelRequest) -> str:
     根据当前上下文切换普通客服提示词和报告生成提示词。
     """
 
-    is_report = request.runtime.context.get("report", False)
+    is_report = (request.runtime.context or {}).get("report", False)
 
     if is_report:
         return load_report_prompts()
