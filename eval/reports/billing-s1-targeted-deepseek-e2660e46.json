@@ -1,0 +1,296 @@
+{
+  "planner": "deepseek",
+  "metadata": {
+    "chat_model_name": "deepseek-flash",
+    "checker_max_tool_calls": 8,
+    "maker_max_tool_calls": 3,
+    "max_revisions": 2
+  },
+  "historical_deposit_message_guard_codes": [],
+  "cases": [
+    {
+      "name": "S1",
+      "design": "C",
+      "mutation": null,
+      "injected": false,
+      "not_injected_reason": null,
+      "passed": true,
+      "errors": [],
+      "correct_outcome": true,
+      "first_correct": true,
+      "first_rejected": false,
+      "revisions": 0,
+      "after_backfill": null,
+      "unauthorized_calls": 0,
+      "llm_calls": 7,
+      "tokens": 20084,
+      "seconds": 18.441,
+      "report": {
+        "case_id": "CASE-18A1BD7AB721",
+        "run_id": "RUN-F58398B06EB6",
+        "planner": "deepseek",
+        "status": "action_executed",
+        "dispute_type": "failed_start_charged",
+        "chain": [
+          {
+            "attempt_id": "ATT-DE4822F2E0AB",
+            "session_id": "SES-7C0C24012173",
+            "order_id": "ORD-9D67DDC1F92F",
+            "txn_ids": [
+              "TXN-273020593B39",
+              "TXN-1C8952F05A07",
+              "TXN-A99E4DC0C232"
+            ]
+          },
+          {
+            "attempt_id": "ATT-CDA4D81D29D3",
+            "session_id": null,
+            "order_id": null,
+            "txn_ids": [
+              "TXN-EE3F57CE4022",
+              "TXN-05AF6B3AA6D4"
+            ]
+          }
+        ],
+        "candidates": [],
+        "facts_summary": {
+          "anomalies": [
+            {
+              "code": "UNRELEASED_FREEZE",
+              "detail": "冻结流水尚未解冻",
+              "amount_fen": 5000,
+              "evidence_ids": [
+                "ATT-CDA4D81D29D3",
+                "TXN-EE3F57CE4022"
+              ]
+            }
+          ],
+          "missing_evidence": []
+        },
+        "proposals": [
+          {
+            "proposal_id": "PRP-ED50CDDE3E37",
+            "version": 1,
+            "resolution": "action",
+            "actions": [
+              {
+                "action_type": "unfreeze",
+                "target_txn_id": "TXN-EE3F57CE4022",
+                "amount_fen": 5000,
+                "reason": "ATT-CDA4D81D29D3 启动超时未产生订单，其启动冻结 TXN-EE3F57CE4022 未解冻（UNRELEASED_FREEZE），按整笔 5000 分解冻"
+              }
+            ],
+            "cited_policy_id": "POLICY-STD-01",
+            "rationale": "客户在 CP-A01 1 号枪先后发起两次启动：ATT-CDA4D81D29D3（00:20Z）超时未启动，仅产生启动冻结 TXN-EE3F57CE4022（5000 分），该冻结 released_by_txn_id 为空，属 UNRELEASED_FREEZE 异常，是余额减少的主因；ATT-DE4822F2E0AB（00:30Z）成功启动，对应订单 ORD-9D67DDC1F92F，其冻结 TXN-273020593B39 已由 TXN-A99E4DC0C232 解除。订单按 POLICY-STD-01 以开始时段计价：本地开始时间 2026-11-20T08:30:00+08:00 落在平段（07:00-10:00），电费 80 分/kWh、服务费 60 分/kWh，4000Wh 计电费 320 分、服务费 240 分，无空闲费，合计 560 分，与重算结果一致，扣款 TXN-1C8952F05A07 金额 560 分正确，无重复扣款，故不对订单退款。失败启动遗留冻结按整笔 5000 分解冻，不涉及金额估算。",
+            "evidence_ids": [
+              "ATT-CDA4D81D29D3",
+              "TXN-EE3F57CE4022",
+              "ATT-DE4822F2E0AB",
+              "TXN-273020593B39",
+              "TXN-A99E4DC0C232",
+              "ORD-9D67DDC1F92F",
+              "TXN-1C8952F05A07",
+              "SES-7C0C24012173",
+              "MTR-5AE0BF5CB317",
+              "MTR-47E07D053B7D",
+              "POLICY-STD-01"
+            ],
+            "customer_message": "您好，已核实您本次的两笔操作：第一次（00:20）启动超时未成功，只做了一笔 5000 分的启动冻结，这笔冻结一直没有解除，所以余额看起来少了一大块；第二次（00:30）启动成功，充电 4 度，按平段电价计费共 560 分，该笔冻结已在结算时解除，金额无误。我们将为第一次失败启动的冻结提交整笔解冻申请，需人工审批后处理，到账时间以钱包实际显示为准。感谢您的耐心等待。"
+          }
+        ],
+        "reviews": [
+          {
+            "proposal_id": "PRP-ED50CDDE3E37",
+            "hard_check_passed": true,
+            "approved": true,
+            "issues": []
+          }
+        ],
+        "approval": {
+          "decision": "approve",
+          "approver": "evaluation",
+          "modified_actions": null,
+          "comment": null
+        },
+        "action_results": [
+          {
+            "action_id": "ACT-5BB88CDF63EE",
+            "action_type": "unfreeze",
+            "target_txn_id": "TXN-EE3F57CE4022",
+            "amount_fen": 5000,
+            "result_txn_id": "TXN-05AF6B3AA6D4",
+            "status": "succeeded",
+            "reject_reason": null
+          }
+        ],
+        "failure": null,
+        "customer_message": "审批已通过，资金处理已完成，可查看钱包流水。",
+        "simulated_data": true
+      }
+    },
+    {
+      "name": "S1",
+      "design": "C",
+      "mutation": "M_MISSED_REMEDY",
+      "injected": true,
+      "not_injected_reason": null,
+      "passed": true,
+      "errors": [],
+      "correct_outcome": true,
+      "first_correct": false,
+      "first_rejected": true,
+      "revisions": 1,
+      "after_backfill": null,
+      "unauthorized_calls": 0,
+      "llm_calls": 15,
+      "tokens": 52829,
+      "seconds": 31.338,
+      "report": {
+        "case_id": "CASE-5CB1A1B532BC",
+        "run_id": "RUN-C38C47D6B240",
+        "planner": "deepseek",
+        "status": "action_executed",
+        "dispute_type": "failed_start_charged",
+        "chain": [
+          {
+            "attempt_id": "ATT-70DD05F03EFD",
+            "session_id": null,
+            "order_id": null,
+            "txn_ids": [
+              "TXN-DBACFC9A57F9",
+              "TXN-549BCA8E7460"
+            ]
+          },
+          {
+            "attempt_id": "ATT-2AB6CAB20DD6",
+            "session_id": "SES-0B8B49950A4B",
+            "order_id": "ORD-98CC9DE3C193",
+            "txn_ids": [
+              "TXN-6FE529642FE9",
+              "TXN-2E65CE25D88A",
+              "TXN-A31BB49063C1"
+            ]
+          }
+        ],
+        "candidates": [],
+        "facts_summary": {
+          "anomalies": [
+            {
+              "code": "UNRELEASED_FREEZE",
+              "detail": "冻结流水尚未解冻",
+              "amount_fen": 5000,
+              "evidence_ids": [
+                "ATT-70DD05F03EFD",
+                "TXN-DBACFC9A57F9"
+              ]
+            }
+          ],
+          "missing_evidence": []
+        },
+        "proposals": [
+          {
+            "proposal_id": "PRP-552B33E1B82C",
+            "version": 1,
+            "resolution": "explained",
+            "actions": [],
+            "cited_policy_id": "POLICY-STD-01",
+            "rationale": "两次扫码：第一次 ATT-70DD05F03EFD（00:20Z）启动超时，未产生会话，但该次启动冻结 TXN-DBACFC9A57F9（5000分）状态为 succeeded 且 released_by_txn_id 为空，构成 UNRELEASED_FREEZE 异常，是余额减少的主因；按规则失败启动遗留冻结只能按整笔金额解冻，故对 TXN-DBACFC9A57F9 解冻 5000 分。第二次 ATT-2AB6CAB20DD6（00:30Z）正常启动，会话 SES-0B8B49950A4B 起止读数 0→4000Wh，按 POLICY-STD-01 以开始时段计价，本地开始时间 2026-11-20T08:30:00+08:00 落在平段（07:00-10:00，电费80分/kWh、服务费60分/kWh），重算电费320分+服务费240分+空闲费0分=560分，与订单 ORD-98CC9DE3C193 结算扣款 TXN-2E65CE25D88A（560分）一致，无重复扣款，故不退款。该次启动冻结 TXN-6FE529642FE9 已由 TXN-A31BB49063C1 解除，无需再次处理。订单剩余可退额 0 分，无在途退款。",
+            "evidence_ids": [
+              "ATT-70DD05F03EFD",
+              "TXN-DBACFC9A57F9",
+              "ATT-2AB6CAB20DD6",
+              "TXN-6FE529642FE9",
+              "TXN-A31BB49063C1",
+              "TXN-2E65CE25D88A",
+              "ORD-98CC9DE3C193",
+              "SES-0B8B49950A4B",
+              "POLICY-STD-01",
+              "MTR-3BB32DC96BC8",
+              "MTR-ADD074266200"
+            ],
+            "customer_message": "您好，经核查：您第一次扫码（00:20）启动超时，没有开始充电，但该次启动的 5000 分预冻结资金一直未释放，这是余额明显减少的主要原因；我们已提交解冻该笔 5000 分的申请，待人工审批后处理。第二次扫码（00:30）正常启动并完成充电，充电量 4 度，按开始时段（平段）计价，电费 3.20 元、服务费 2.40 元，合计 5.60 元，与结算金额一致，无重复扣款，因此不涉及退款；该次启动的预冻结资金已正常释放。感谢您的耐心等待。"
+          },
+          {
+            "proposal_id": "PRP-7908C72D7877",
+            "version": 2,
+            "resolution": "action",
+            "actions": [
+              {
+                "action_type": "unfreeze",
+                "target_txn_id": "TXN-DBACFC9A57F9",
+                "amount_fen": 5000,
+                "reason": "第一次扫码 ATT-70DD05F03EFD 启动超时未产生会话，其启动冻结 TXN-DBACFC9A57F9（5000分）仍为 succeeded 且无解冻配对，属 UNRELEASED_FREEZE，按整笔金额解冻"
+              }
+            ],
+            "cited_policy_id": "POLICY-STD-01",
+            "rationale": "两次扫码：第一次 ATT-70DD05F03EFD（2026-11-20T00:20:00Z）启动超时，未产生会话，但该次启动冻结 TXN-DBACFC9A57F9（5000分）状态 succeeded、released_by_txn_id 为空，且无任何解冻流水配对，构成 UNRELEASED_FREEZE 异常，是余额减少的主因；按规则失败启动遗留冻结只能按整笔金额解冻，故对 TXN-DBACFC9A57F9 执行 unfreeze 5000 分。第二次 ATT-2AB6CAB20DD6（00:30Z）正常启动，会话 SES-0B8B49950A4B 读数 0→4000Wh，重算结果 period_type=flat、started_at_local=2026-11-20T08:30:00+08:00，落在平段（07:00-10:00，电费80分/kWh、服务费60分/kWh），电费320分+服务费240分+空闲费0分=560分，与订单 ORD-98CC9DE3C193 结算扣款 TXN-2E65CE25D88A（560分）一致，无重复扣款，故不退款（该扣款当前可退额 560 分仅为账面可退上限，本单无退款依据）。该次启动冻结 TXN-6FE529642FE9 已由 TXN-A31BB49063C1 解除，无需再次处理。订单剩余可退额 0 分，无在途退款。上一版 issues 指出的缺失解冻动作与过度承诺已修订：本次补充可执行 unfreeze 动作，文案与动作一致。",
+            "evidence_ids": [
+              "ATT-70DD05F03EFD",
+              "TXN-DBACFC9A57F9",
+              "ATT-2AB6CAB20DD6",
+              "TXN-6FE529642FE9",
+              "TXN-A31BB49063C1",
+              "TXN-2E65CE25D88A",
+              "ORD-98CC9DE3C193",
+              "SES-0B8B49950A4B",
+              "POLICY-STD-01",
+              "MTR-3BB32DC96BC8",
+              "MTR-ADD074266200"
+            ],
+            "customer_message": "您好，经核查：您第一次扫码（00:20）启动超时，没有开始充电，但该次启动的 5000 分预冻结资金一直未释放，这是余额明显减少的主要原因；我们已提交解冻该笔 5000 分的申请，待人工审批后处理。第二次扫码（00:30）正常启动并完成充电，充电量 4 度，按开始时段（平段）计价，电费 3.20 元、服务费 2.40 元，合计 5.60 元，与结算金额一致，无重复扣款，因此不涉及退款；该次启动的预冻结资金已正常释放。感谢您的耐心等待。"
+          }
+        ],
+        "reviews": [
+          {
+            "proposal_id": "PRP-552B33E1B82C",
+            "hard_check_passed": true,
+            "approved": false,
+            "issues": [
+              {
+                "code": "S_MISSED_REMEDY",
+                "detail": "核查确认 ATT-70DD05F03EFD 的启动冻结 TXN-DBACFC9A57F9（5000分，succeeded，related_txn_id 为空，无任何 unfreeze 配对）仍未释放，是余额减少的主因，需要本次执行解冻 5000 分。但 Proposal 的 resolution 为 explained、actions 为空，没有任何 unfreeze 动作指向 TXN-DBACFC9A57F9 / 金额 5000 分；rationale 与 customer_message 却声称「对 TXN-DBACFC9A57F9 解冻 5000 分」「已提交解冻该笔 5000 分的申请」，文案不能替代可执行动作。请补充 action：type=unfreeze，target_txn_id=TXN-DBACFC9A57F9，amount_fen=5000（或明确改为不承诺解冻并说明理由）。",
+                "evidence_ids": [
+                  "TXN-DBACFC9A57F9",
+                  "ATT-70DD05F03EFD"
+                ]
+              },
+              {
+                "code": "S_OVERPROMISE",
+                "detail": "customer_message 称「已提交解冻该笔 5000 分的申请，待人工审批后处理」，但结构化 actions 为空，本次不会执行任何资金动作，属于对处理状态的过度承诺；应改为与 actions 一致的可执行表述（如补充解冻动作后说明将解冻 5000 分）。",
+                "evidence_ids": [
+                  "TXN-DBACFC9A57F9"
+                ]
+              }
+            ]
+          },
+          {
+            "proposal_id": "PRP-7908C72D7877",
+            "hard_check_passed": true,
+            "approved": true,
+            "issues": []
+          }
+        ],
+        "approval": {
+          "decision": "approve",
+          "approver": "evaluation",
+          "modified_actions": null,
+          "comment": null
+        },
+        "action_results": [
+          {
+            "action_id": "ACT-96A1A9338FD0",
+            "action_type": "unfreeze",
+            "target_txn_id": "TXN-DBACFC9A57F9",
+            "amount_fen": 5000,
+            "result_txn_id": "TXN-549BCA8E7460",
+            "status": "succeeded",
+            "reject_reason": null
+          }
+        ],
+        "failure": null,
+        "customer_message": "审批已通过，资金处理已完成，可查看钱包流水。",
+        "simulated_data": true
+      }
+    }
+  ]
+}

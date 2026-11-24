@@ -1,0 +1,1000 @@
+{
+  "planner": "deepseek",
+  "metadata": {
+    "chat_model_name": "deepseek-flash",
+    "checker_max_tool_calls": 8,
+    "maker_max_tool_calls": 3,
+    "max_revisions": 2
+  },
+  "database": "cb_eval_937b6b3a",
+  "passed": 11,
+  "total": 11,
+  "cases": [
+    {
+      "name": "S1",
+      "design": "C",
+      "mutation": null,
+      "injected": false,
+      "not_injected_reason": null,
+      "passed": true,
+      "errors": [],
+      "correct_outcome": true,
+      "first_correct": true,
+      "first_rejected": false,
+      "revisions": 0,
+      "after_backfill": null,
+      "unauthorized_calls": 0,
+      "llm_calls": 8,
+      "tokens": 23209,
+      "seconds": 18.324,
+      "report": {
+        "case_id": "CASE-2DCBBD9B0515",
+        "run_id": "RUN-3E1E81DC95D5",
+        "planner": "deepseek",
+        "status": "action_executed",
+        "dispute_type": "failed_start_charged",
+        "chain": [
+          {
+            "attempt_id": "ATT-C814872C5685",
+            "session_id": null,
+            "order_id": null,
+            "txn_ids": [
+              "TXN-AFE1F817B6C8",
+              "TXN-4B7BDCABCCCA"
+            ]
+          },
+          {
+            "attempt_id": "ATT-8828CB7F0257",
+            "session_id": "SES-1E39F7D8B459",
+            "order_id": "ORD-9027A497AD54",
+            "txn_ids": [
+              "TXN-0A29170B6AF6",
+              "TXN-6F4FC73610FF",
+              "TXN-CDE2F5579274"
+            ]
+          }
+        ],
+        "candidates": [],
+        "facts_summary": {
+          "anomalies": [
+            {
+              "code": "UNRELEASED_FREEZE",
+              "detail": "冻结流水尚未解冻",
+              "amount_fen": 5000,
+              "evidence_ids": [
+                "ATT-C814872C5685",
+                "TXN-AFE1F817B6C8"
+              ]
+            }
+          ],
+          "missing_evidence": []
+        },
+        "proposals": [
+          {
+            "proposal_id": "PRP-9F868ED5B161",
+            "version": 1,
+            "resolution": "action",
+            "actions": [
+              {
+                "action_type": "unfreeze",
+                "target_txn_id": "TXN-AFE1F817B6C8",
+                "amount_fen": 5000,
+                "reason": "首次扫码 ATT-C814872C5685 启动超时未产生充电会话，其启动冻结 5000 分未解冻（UNRELEASED_FREEZE），按 POLICY-STD-01 启动冻结规则整笔解冻。"
+              }
+            ],
+            "cited_policy_id": "POLICY-STD-01",
+            "rationale": "两次扫码：ATT-C814872C5685（00:20Z）超时未启动，仅产生启动冻结 TXN-AFE1F817B6C8（5000分），该冻结 released_by_txn_id 为空，属 UNRELEASED_FREEZE 异常，按政策启动冻结5000分应在失败后整笔解冻，故按整笔5000分解冻。第二次 ATT-8828CB7F0257 正常启动，订单 ORD-9027A497AD54 按 POLICY-STD-01 重算：本地开始时间 2026-11-20T08:30:00+08:00 属平段（07:00-10:00），4000Wh 电费320分+服务费240分，空闲0分钟，合计560分，与已结算扣款 TXN-6F4FC73610FF（560分）一致，无重复扣款，故不退款；该扣款当前可退额560分但订单已按实际用电结算，无需退款。第二次冻结 TXN-0A29170B6AF6 已由 TXN-CDE2F5579274 解除，无需再处理。客户感知的“余额少了一大块”主要来自未释放的5000分冻结。",
+            "evidence_ids": [
+              "ATT-C814872C5685",
+              "TXN-AFE1F817B6C8",
+              "ATT-8828CB7F0257",
+              "TXN-0A29170B6AF6",
+              "TXN-CDE2F5579274",
+              "TXN-6F4FC73610FF",
+              "ORD-9027A497AD54",
+              "SES-1E39F7D8B459",
+              "MTR-DA6C5D20F83F",
+              "MTR-E10714B8B4B0"
+            ],
+            "customer_message": "您好，已核实您本次两次扫码的情况：第一次扫码（00:20）因启动超时并未真正开始充电，但当时预冻结的 50 元额度没有被释放，所以您看到余额少了一大块；第二次扫码（00:30）正常启动并完成充电，按平段电价结算 4 度电，共 5.60 元，金额与计费规则一致，没有多扣。我们已提交将第一次未释放的 50 元冻结整笔解冻，该操作需人工审批后处理，解冻后额度会回到您的钱包余额，具体到账时间以系统处理为准。第二次的冻结已正常解除，无需额外处理。"
+          }
+        ],
+        "reviews": [
+          {
+            "proposal_id": "PRP-9F868ED5B161",
+            "hard_check_passed": true,
+            "approved": true,
+            "issues": []
+          }
+        ],
+        "approval": {
+          "decision": "approve",
+          "approver": "evaluation",
+          "modified_actions": null,
+          "comment": null
+        },
+        "action_results": [
+          {
+            "action_id": "ACT-B1D21D726CAA",
+            "action_type": "unfreeze",
+            "target_txn_id": "TXN-AFE1F817B6C8",
+            "amount_fen": 5000,
+            "result_txn_id": "TXN-4B7BDCABCCCA",
+            "status": "succeeded",
+            "reject_reason": null
+          }
+        ],
+        "failure": null,
+        "customer_message": "审批已通过，资金处理已完成，可查看钱包流水。",
+        "simulated_data": true
+      }
+    },
+    {
+      "name": "S2",
+      "design": "C",
+      "mutation": null,
+      "injected": false,
+      "not_injected_reason": null,
+      "passed": true,
+      "errors": [],
+      "correct_outcome": true,
+      "first_correct": false,
+      "first_rejected": true,
+      "revisions": 1,
+      "after_backfill": null,
+      "unauthorized_calls": 0,
+      "llm_calls": 13,
+      "tokens": 39758,
+      "seconds": 27.567,
+      "report": {
+        "case_id": "CASE-84F5FB9D8A8E",
+        "run_id": "RUN-B15C947BE423",
+        "planner": "deepseek",
+        "status": "action_executed",
+        "dispute_type": "double_charge",
+        "chain": [
+          {
+            "attempt_id": "ATT-1C8813DFB6F8",
+            "session_id": "SES-CA53E6645934",
+            "order_id": "ORD-D6B0AD5D6D33",
+            "txn_ids": [
+              "TXN-1482D3B0052A",
+              "TXN-AB472DBE20B2",
+              "TXN-BC8ECE4B74DC",
+              "TXN-90E0633F3877",
+              "TXN-25DF4325766E"
+            ]
+          }
+        ],
+        "candidates": [],
+        "facts_summary": {
+          "anomalies": [
+            {
+              "code": "DUPLICATE_DEDUCT",
+              "detail": "同一订单多笔扣款",
+              "amount_fen": 560,
+              "evidence_ids": [
+                "ORD-D6B0AD5D6D33",
+                "TXN-90E0633F3877"
+              ]
+            }
+          ],
+          "missing_evidence": []
+        },
+        "proposals": [
+          {
+            "proposal_id": "PRP-8DEAC7E0CD92",
+            "version": 1,
+            "resolution": "action",
+            "actions": [
+              {
+                "action_type": "refund",
+                "target_txn_id": "TXN-90E0633F3877",
+                "amount_fen": 560,
+                "reason": "同一订单 ORD-D6B0AD5D6D33 重复扣款，本笔为额外扣款，按 POLICY-STD-01 结算金额 560 分保留一笔，退还本笔 560 分"
+              }
+            ],
+            "cited_policy_id": "POLICY-STD-01",
+            "rationale": "订单 ORD-D6B0AD5D6D33（会话 SES-CA53E6645934，充电 2026-11-20T00:30Z 起，本地 08:30，属平段）按 POLICY-STD-01 重算：4000Wh，电费 320 分 + 服务费 240 分，闲置 0 分钟，合计 560 分，与订单金额一致。但该订单存在两笔成功扣款：TXN-BC8ECE4B74DC（560 分）与 TXN-90E0633F3877（560 分），净扣 1120 分，异常 DUPLICATE_DEDUCT 指出同一订单多笔扣款 560 分。按重复扣款只退额外扣款原则，应保留一笔 560 分，退还额外一笔 560 分；TXN-90E0633F3877 当前可退 560 分，与额外扣款金额一致。启动冻结 TXN-1482D3B0052A（5000 分）已由 TXN-AB472DBE20B2 解除，无需再次处理。无在途退款。",
+            "evidence_ids": [
+              "ORD-D6B0AD5D6D33",
+              "TXN-BC8ECE4B74DC",
+              "TXN-90E0633F3877",
+              "TXN-1482D3B0052A",
+              "TXN-AB472DBE20B2",
+              "SES-CA53E6645934",
+              "MTR-FAD429F1869C",
+              "MTR-4475E4637233",
+              "POLICY-STD-01"
+            ],
+            "customer_message": "您好，经核查，本次充电（订单 ORD-D6B0AD5D6D33）按标准计费应为 560 分（电费 320 分 + 服务费 240 分），但系统对同一订单成功扣款两次，共 1120 分，多扣了 560 分。我们已为您提交退还多扣的 560 分至钱包余额，该操作需人工审批后处理，到账时间以实际处理为准。启动时冻结的 5000 分已正常解除，无需另行处理。感谢您的反馈。"
+          },
+          {
+            "proposal_id": "PRP-BD51C1859F5F",
+            "version": 2,
+            "resolution": "action",
+            "actions": [
+              {
+                "action_type": "refund",
+                "target_txn_id": "TXN-90E0633F3877",
+                "amount_fen": 560,
+                "reason": "同一订单重复扣款中的额外一笔，按 POLICY-STD-01 结算金额 560 分保留一笔，退还本笔 560 分"
+              }
+            ],
+            "cited_policy_id": "POLICY-STD-01",
+            "rationale": "订单按 POLICY-STD-01 重算：本地开始时间 08:30 属平段（07:00-10:00，电费 80 分/kWh、服务费 60 分/kWh），4000Wh 即电费 320 分 + 服务费 240 分，闲置 0 分钟，合计 560 分，与订单金额一致。但该订单有两笔成功扣款 TXN-BC8ECE4B74DC 与 TXN-90E0633F3877，各 560 分，净扣 1120 分，异常 DUPLICATE_DEDUCT 指出同一订单多笔扣款 560 分。按重复扣款只退额外扣款原则，保留一笔 560 分，退还额外一笔 560 分；TXN-90E0633F3877 当前可退 560 分，与额外扣款金额一致。启动冻结 TXN-1482D3B0052A（5000 分）已由 TXN-AB472DBE20B2 解除，无需再次处理。无在途退款。已按上一版打回意见移除车主说明中的内部编号，仅保留在 evidence_ids 中。",
+            "evidence_ids": [
+              "ORD-D6B0AD5D6D33",
+              "TXN-BC8ECE4B74DC",
+              "TXN-90E0633F3877",
+              "TXN-1482D3B0052A",
+              "TXN-AB472DBE20B2",
+              "SES-CA53E6645934",
+              "MTR-FAD429F1869C",
+              "MTR-4475E4637233",
+              "POLICY-STD-01"
+            ],
+            "customer_message": "您好，经核查，本次充电按标准计费应为 560 分（电费 320 分 + 服务费 240 分），但系统对同一订单成功扣款两次，共 1120 分，多扣了 560 分。我们已为您提交退还多扣的 560 分至钱包余额，该操作需人工审批后处理，到账时间以实际处理为准。启动时冻结的 5000 分已正常解除，无需另行处理。感谢您的反馈。"
+          }
+        ],
+        "reviews": [
+          {
+            "proposal_id": "PRP-8DEAC7E0CD92",
+            "hard_check_passed": true,
+            "approved": false,
+            "issues": [
+              {
+                "code": "S_LEAK",
+                "detail": "请移除车主说明中的内部标识，将其保留在 evidence_ids 中",
+                "evidence_ids": []
+              }
+            ]
+          },
+          {
+            "proposal_id": "PRP-BD51C1859F5F",
+            "hard_check_passed": true,
+            "approved": true,
+            "issues": []
+          }
+        ],
+        "approval": {
+          "decision": "approve",
+          "approver": "evaluation",
+          "modified_actions": null,
+          "comment": null
+        },
+        "action_results": [
+          {
+            "action_id": "ACT-7621756D8F00",
+            "action_type": "refund",
+            "target_txn_id": "TXN-90E0633F3877",
+            "amount_fen": 560,
+            "result_txn_id": "TXN-25DF4325766E",
+            "status": "succeeded",
+            "reject_reason": null
+          }
+        ],
+        "failure": null,
+        "customer_message": "审批已通过，资金处理已完成，可查看钱包流水。",
+        "simulated_data": true
+      }
+    },
+    {
+      "name": "S3",
+      "design": "C",
+      "mutation": null,
+      "injected": false,
+      "not_injected_reason": null,
+      "passed": true,
+      "errors": [],
+      "correct_outcome": true,
+      "first_correct": false,
+      "first_rejected": false,
+      "revisions": 0,
+      "after_backfill": null,
+      "unauthorized_calls": 0,
+      "llm_calls": 2,
+      "tokens": 2059,
+      "seconds": 7.331,
+      "report": {
+        "case_id": "CASE-AE892EDA011A",
+        "run_id": "RUN-8BCBD3D6EE00",
+        "planner": "deepseek",
+        "status": "pending_evidence",
+        "dispute_type": "recharge_missing",
+        "chain": [],
+        "candidates": [],
+        "facts_summary": {
+          "anomalies": [
+            {
+              "code": "PENDING_RECHARGE",
+              "detail": "充值回调待确认",
+              "amount_fen": 10000,
+              "evidence_ids": [
+                "TXN-E06FE532D9C2"
+              ]
+            }
+          ],
+          "missing_evidence": [
+            "recharge_callback"
+          ]
+        },
+        "proposals": [],
+        "reviews": [],
+        "approval": null,
+        "action_results": [],
+        "failure": null,
+        "customer_message": "需要等待充值回调或补充结束读数后再核查。",
+        "simulated_data": true
+      }
+    },
+    {
+      "name": "S4",
+      "design": "C",
+      "mutation": null,
+      "injected": false,
+      "not_injected_reason": null,
+      "passed": true,
+      "errors": [],
+      "correct_outcome": true,
+      "first_correct": true,
+      "first_rejected": false,
+      "revisions": 0,
+      "after_backfill": null,
+      "unauthorized_calls": 0,
+      "llm_calls": 8,
+      "tokens": 20842,
+      "seconds": 13.47,
+      "report": {
+        "case_id": "CASE-71CDC1D75D88",
+        "run_id": "RUN-D45773B5E242",
+        "planner": "deepseek",
+        "status": "action_executed",
+        "dispute_type": "wrong_tariff",
+        "chain": [
+          {
+            "attempt_id": "ATT-A9ACBE4A97BE",
+            "session_id": "SES-53F48D2D53C3",
+            "order_id": "ORD-EAB5CEEB99E3",
+            "txn_ids": [
+              "TXN-C9A183D6ACF2",
+              "TXN-0EC36039B3D7",
+              "TXN-EDC7C53A2773",
+              "TXN-5B6A35E801D9"
+            ]
+          }
+        ],
+        "candidates": [],
+        "facts_summary": {
+          "anomalies": [
+            {
+              "code": "TARIFF_MISMATCH",
+              "detail": "订单与政策重算不符",
+              "amount_fen": 240,
+              "evidence_ids": [
+                "ORD-EAB5CEEB99E3",
+                "POLICY-STD-01"
+              ]
+            }
+          ],
+          "missing_evidence": []
+        },
+        "proposals": [
+          {
+            "proposal_id": "PRP-081079E51FD3",
+            "version": 1,
+            "resolution": "action",
+            "actions": [
+              {
+                "action_type": "refund",
+                "target_txn_id": "TXN-EDC7C53A2773",
+                "amount_fen": 240,
+                "reason": "订单按开始时段（本地 08:30，平段）重算应为 560 分，实收 800 分，多收 240 分，按额外扣款金额退回。"
+              }
+            ],
+            "cited_policy_id": "POLICY-STD-01",
+            "rationale": "订单 ORD-EAB5CEEB99E3 会话开始时间为 2026-11-20T00:30:00Z，即本地 08:30（+08:00）。按 POLICY-STD-01「按开始时段为整单计价」，07:00–10:00 属平段（电费 80 分/kWh、服务费 60 分/kWh），并非峰段（峰段为 10:00–15:00、18:00–21:00）。重算结果：period_type=flat，4000Wh 电费 320 分、服务费 240 分、闲置 0 分（停止充电 01:30Z，拔枪 01:40Z，在 15 分钟宽限内），合计 560 分。原扣款 TXN-EDC7C53A2773 收取 800 分，多收 240 分，与异常 TARIFF_MISMATCH 金额一致。该扣款当前剩余可退 800 分，订单剩余可退额 240 分，故按 240 分退款。启动冻结 TXN-C9A183D6ACF2（5000 分）已由 TXN-0EC36039B3D7 解除，无需再处理。",
+            "evidence_ids": [
+              "ORD-EAB5CEEB99E3",
+              "POLICY-STD-01",
+              "SES-53F48D2D53C3",
+              "MTR-FE3B0AEAB594",
+              "MTR-19BEA9DE41D2",
+              "TXN-EDC7C53A2773",
+              "TXN-C9A183D6ACF2",
+              "TXN-0EC36039B3D7"
+            ],
+            "customer_message": "您好，已为您核对本次充电的计费时段。您的充电开始于本地时间 08:30，属于平段（07:00–10:00），并非峰段（峰段为 10:00–15:00 和 18:00–21:00），因此整单应按平段电价计算。按 4 度电重算，电费 32 元、服务费 24 元，合计 56 元；原收取 80 元，多收 24 元。我们已提交 24 元的退款申请，待人工审批通过后退回您的钱包余额，具体到账时间以钱包记录为准。启动时冻结的 50 元已随结算解除，无需另行处理。感谢您的反馈。"
+          }
+        ],
+        "reviews": [
+          {
+            "proposal_id": "PRP-081079E51FD3",
+            "hard_check_passed": true,
+            "approved": true,
+            "issues": []
+          }
+        ],
+        "approval": {
+          "decision": "approve",
+          "approver": "evaluation",
+          "modified_actions": null,
+          "comment": null
+        },
+        "action_results": [
+          {
+            "action_id": "ACT-911930C4D598",
+            "action_type": "refund",
+            "target_txn_id": "TXN-EDC7C53A2773",
+            "amount_fen": 240,
+            "result_txn_id": "TXN-5B6A35E801D9",
+            "status": "succeeded",
+            "reject_reason": null
+          }
+        ],
+        "failure": null,
+        "customer_message": "审批已通过，资金处理已完成，可查看钱包流水。",
+        "simulated_data": true
+      }
+    },
+    {
+      "name": "S5",
+      "design": "C",
+      "mutation": null,
+      "injected": false,
+      "not_injected_reason": null,
+      "passed": true,
+      "errors": [],
+      "correct_outcome": true,
+      "first_correct": true,
+      "first_rejected": false,
+      "revisions": 0,
+      "after_backfill": null,
+      "unauthorized_calls": 0,
+      "llm_calls": 7,
+      "tokens": 19997,
+      "seconds": 13.285,
+      "report": {
+        "case_id": "CASE-EB2AAB487889",
+        "run_id": "RUN-D3007AF6210D",
+        "planner": "deepseek",
+        "status": "explained",
+        "dispute_type": "double_charge",
+        "chain": [
+          {
+            "attempt_id": "ATT-2646112EC22A",
+            "session_id": "SES-6F9561297B8C",
+            "order_id": "ORD-D0D15121ECDA",
+            "txn_ids": [
+              "TXN-E9BA7DFD3780",
+              "TXN-B9C5C22AE7B0",
+              "TXN-C459234BBCB5",
+              "TXN-C2AF8870162A",
+              "TXN-99AFED07F3F0"
+            ]
+          }
+        ],
+        "candidates": [],
+        "facts_summary": {
+          "anomalies": [
+            {
+              "code": "DUPLICATE_DEDUCT",
+              "detail": "同一订单多笔扣款",
+              "amount_fen": 560,
+              "evidence_ids": [
+                "ORD-D0D15121ECDA",
+                "TXN-C2AF8870162A"
+              ]
+            },
+            {
+              "code": "PENDING_REFUND",
+              "detail": "退款处理中",
+              "amount_fen": 560,
+              "evidence_ids": [
+                "TXN-99AFED07F3F0",
+                "ORD-D0D15121ECDA"
+              ]
+            }
+          ],
+          "missing_evidence": []
+        },
+        "proposals": [
+          {
+            "proposal_id": "PRP-AD343D414042",
+            "version": 1,
+            "resolution": "explained",
+            "actions": [],
+            "cited_policy_id": "POLICY-STD-01",
+            "rationale": "订单 ORD-D0D15121ECDA 按 POLICY-STD-01 重算：计费时段为平段（本地开始时间 2026-11-20T08:30:00+08:00，period_type=flat），电量 4000Wh，电费 320 分、服务费 240 分、无超时占位费，应收合计 560 分，与订单金额一致。实际发生两笔成功扣款：TXN-C459234BBCB5（560 分）与 TXN-C2AF8870162A（560 分），净扣 1120 分，构成 DUPLICATE_DEDUCT，额外扣款为 560 分。针对额外扣款 TXN-C2AF8870162A 已存在一笔退款 TXN-99AFED07F3F0（560 分，状态 pending，关联扣款 TXN-C2AF8870162A），该笔在途退款已占用订单剩余可退额，故订单 order_refundable_fen=0，TXN-C2AF8870162A 当前可退 0 分，无需也不应重复发起退款；正常扣款 TXN-C459234BBCB5 可退 560 分，属应收金额，不予退款。启动冻结 TXN-E9BA7DFD3780（5000 分）已由 TXN-B9C5C22AE7B0 解除，无 UNRELEASED_FREEZE 异常，无需再次处理。综上，本单无待执行的资金动作，仅解释退款进度。",
+            "evidence_ids": [
+              "ORD-D0D15121ECDA",
+              "TXN-C459234BBCB5",
+              "TXN-C2AF8870162A",
+              "TXN-99AFED07F3F0",
+              "TXN-E9BA7DFD3780",
+              "TXN-B9C5C22AE7B0",
+              "SES-6F9561297B8C",
+              "MTR-EA34BB15F96E",
+              "MTR-9EDD03C57EB6",
+              "POLICY-STD-01"
+            ],
+            "customer_message": "您好，关于您这笔充电订单的重复扣款问题，我们已核实：本单应收 560 分（4 度电，平段计价，电费 320 分、服务费 240 分），但系统实际扣了两笔各 560 分，多扣的 560 分已为您发起退款，目前该退款正在处理中（状态：处理中），到账时间以支付渠道实际处理为准，暂无法承诺具体时点。启动时冻结的 5000 分已随订单结算解除，不会额外占用您的余额。本次无需您再做任何操作，也无需重复申请退款，请耐心等待该笔退款完成即可。"
+          }
+        ],
+        "reviews": [
+          {
+            "proposal_id": "PRP-AD343D414042",
+            "hard_check_passed": true,
+            "approved": true,
+            "issues": []
+          }
+        ],
+        "approval": null,
+        "action_results": [],
+        "failure": null,
+        "customer_message": "您好，关于您这笔充电订单的重复扣款问题，我们已核实：本单应收 560 分（4 度电，平段计价，电费 320 分、服务费 240 分），但系统实际扣了两笔各 560 分，多扣的 560 分已为您发起退款，目前该退款正在处理中（状态：处理中），到账时间以支付渠道实际处理为准，暂无法承诺具体时点。启动时冻结的 5000 分已随订单结算解除，不会额外占用您的余额。本次无需您再做任何操作，也无需重复申请退款，请耐心等待该笔退款完成即可。",
+        "simulated_data": true
+      }
+    },
+    {
+      "name": "S6",
+      "design": "C",
+      "mutation": null,
+      "injected": false,
+      "not_injected_reason": null,
+      "passed": true,
+      "errors": [],
+      "correct_outcome": true,
+      "first_correct": false,
+      "first_rejected": false,
+      "revisions": 0,
+      "after_backfill": "explained",
+      "after_backfill_report": {
+        "case_id": "CASE-C01CEFBEF0C3",
+        "run_id": "RUN-591BE90E35E7",
+        "planner": "deepseek",
+        "status": "explained",
+        "dispute_type": "frozen_balance",
+        "chain": [
+          {
+            "attempt_id": "ATT-AA3B4118538E",
+            "session_id": "SES-32191E420032",
+            "order_id": "ORD-939DEBD882A2",
+            "txn_ids": [
+              "TXN-12C424085B65",
+              "TXN-05626037AC75",
+              "TXN-C8AA8180D0E2"
+            ]
+          }
+        ],
+        "candidates": [],
+        "facts_summary": {
+          "anomalies": [],
+          "missing_evidence": []
+        },
+        "proposals": [
+          {
+            "proposal_id": "PRP-01D607A7C390",
+            "version": 1,
+            "resolution": "explained",
+            "actions": [],
+            "cited_policy_id": "POLICY-STD-01",
+            "rationale": "启动时按 POLICY-STD-01 冻结 5000 分（TXN-12C424085B65，2026-11-20T00:30:00Z），该冻结已由成功流水 TXN-05626037AC75 解除（released_by_txn_id），不存在 UNRELEASED_FREEZE 异常，故无需再次解冻。账单延迟原因：结束读数 MTR-F5E89397AD2B 于 2026-11-24T11:44:33Z 才收到，订单 ORD-939DEBD882A2 随即结算（settled_at 同刻），扣款 TXN-C8AA8180D0E2 560 分成功。重算结果：本地开始时间 2026-11-20T08:30:00+08:00 属平段（07:00-10:00），4000Wh 电费 320 分 + 服务费 240 分，空闲 0 分钟，合计 560 分，与已扣金额一致，无多扣。该扣款当前可退额 560 分，但订单已按实际用量正常结算，无重复扣款、无退款在途，故不发起退款。无待执行资金动作。",
+            "evidence_ids": [
+              "TXN-12C424085B65",
+              "TXN-05626037AC75",
+              "TXN-C8AA8180D0E2",
+              "ORD-939DEBD882A2",
+              "SES-32191E420032",
+              "MTR-81E3B1DC5C09",
+              "MTR-F5E89397AD2B",
+              "POLICY-STD-01"
+            ],
+            "customer_message": "您好，已为您核查：本次充电启动时冻结的 5000 分预授权资金已经解除，钱包中不再有该笔冻结。账单之所以延迟，是因为充电结束的读数回传较晚，系统在收到读数后才完成结算并生成账单。按您的实际用电 4 千瓦时、平段电价计算，电费 320 分、服务费 240 分，合计 560 分，与已扣金额一致，没有多扣。目前没有需要额外处理的资金动作。"
+          }
+        ],
+        "reviews": [
+          {
+            "proposal_id": "PRP-01D607A7C390",
+            "hard_check_passed": true,
+            "approved": true,
+            "issues": []
+          }
+        ],
+        "approval": null,
+        "action_results": [],
+        "failure": null,
+        "customer_message": "您好，已为您核查：本次充电启动时冻结的 5000 分预授权资金已经解除，钱包中不再有该笔冻结。账单之所以延迟，是因为充电结束的读数回传较晚，系统在收到读数后才完成结算并生成账单。按您的实际用电 4 千瓦时、平段电价计算，电费 320 分、服务费 240 分，合计 560 分，与已扣金额一致，没有多扣。目前没有需要额外处理的资金动作。",
+        "simulated_data": true
+      },
+      "unauthorized_calls": 0,
+      "llm_calls": 10,
+      "tokens": 22035,
+      "seconds": 16.839,
+      "report": {
+        "case_id": "CASE-C01CEFBEF0C3",
+        "run_id": "RUN-4C772342922F",
+        "planner": "deepseek",
+        "status": "pending_evidence",
+        "dispute_type": "frozen_balance",
+        "chain": [
+          {
+            "attempt_id": "ATT-AA3B4118538E",
+            "session_id": "SES-32191E420032",
+            "order_id": "ORD-939DEBD882A2",
+            "txn_ids": [
+              "TXN-12C424085B65"
+            ]
+          }
+        ],
+        "candidates": [],
+        "facts_summary": {
+          "anomalies": [
+            {
+              "code": "MISSING_END_READING",
+              "detail": "缺少结束电表读数",
+              "amount_fen": null,
+              "evidence_ids": [
+                "ORD-939DEBD882A2",
+                "SES-32191E420032"
+              ]
+            }
+          ],
+          "missing_evidence": [
+            "end_wh"
+          ]
+        },
+        "proposals": [],
+        "reviews": [],
+        "approval": null,
+        "action_results": [],
+        "failure": null,
+        "customer_message": "需要等待充值回调或补充结束读数后再核查。",
+        "simulated_data": true
+      }
+    },
+    {
+      "name": "S7",
+      "design": "C",
+      "mutation": null,
+      "injected": false,
+      "not_injected_reason": null,
+      "passed": true,
+      "errors": [],
+      "correct_outcome": true,
+      "first_correct": false,
+      "first_rejected": false,
+      "revisions": 0,
+      "after_backfill": null,
+      "unauthorized_calls": 0,
+      "llm_calls": 2,
+      "tokens": 1987,
+      "seconds": 2.569,
+      "report": {
+        "case_id": "CASE-0AFD863A32BD",
+        "run_id": "RUN-EDFAC8B0F73E",
+        "planner": "deepseek",
+        "status": "forbidden",
+        "dispute_type": null,
+        "chain": [],
+        "candidates": [],
+        "facts_summary": {},
+        "proposals": [],
+        "reviews": [],
+        "approval": null,
+        "action_results": [],
+        "failure": null,
+        "customer_message": "不可访问",
+        "simulated_data": true
+      }
+    },
+    {
+      "name": "S8",
+      "design": "C",
+      "mutation": null,
+      "injected": false,
+      "not_injected_reason": null,
+      "passed": true,
+      "errors": [],
+      "correct_outcome": true,
+      "first_correct": true,
+      "first_rejected": false,
+      "revisions": 0,
+      "after_backfill": null,
+      "unauthorized_calls": 0,
+      "llm_calls": 8,
+      "tokens": 21005,
+      "seconds": 15.412,
+      "report": {
+        "case_id": "CASE-ADECF8B08626",
+        "run_id": "RUN-531F4F4EE183",
+        "planner": "deepseek",
+        "status": "explained",
+        "dispute_type": "other",
+        "chain": [
+          {
+            "attempt_id": "ATT-820F8F1B83FC",
+            "session_id": "SES-A22BB10B77BE",
+            "order_id": "ORD-3895CD44AB32",
+            "txn_ids": [
+              "TXN-AC0C79644858",
+              "TXN-1C5EC420D16F",
+              "TXN-7846F4E86098"
+            ]
+          }
+        ],
+        "candidates": [],
+        "facts_summary": {
+          "anomalies": [],
+          "missing_evidence": []
+        },
+        "proposals": [
+          {
+            "proposal_id": "PRP-A6F1ADC6919C",
+            "version": 1,
+            "resolution": "explained",
+            "actions": [],
+            "cited_policy_id": "POLICY-STD-01",
+            "rationale": "订单 ORD-3895CD44AB32 按 POLICY-STD-01 重算：本地开始时间 2026-11-20T08:30:00+08:00 落在平段（07:00-10:00），period_type=flat，电费 80 分/kWh、服务费 60 分/kWh；读数 MTR-FCAEFC5A82EF（0 Wh）至 MTR-D9D59A50C92D（4000 Wh）共 4 kWh，电费 320 分、服务费 240 分；停止充电 01:30Z 至拔枪 01:40Z 共 10 分钟，在 15 分钟免费宽限内，闲置费 0 分。合计 560 分，与扣款 TXN-1C5EC420D16F（560 分，succeeded）一致，无多扣、无重复扣款，故无可退金额。启动冻结 TXN-AC0C79644858（5000 分）已由 TXN-7846F4E86098 解除，属已成功解冻流水，无需再次处理；anomalies 为空，不存在 UNRELEASED_FREEZE。客户主张“充得太慢”属充电速度体验问题，不构成计费差错，政策中亦无按速度减免条款，因此不产生退款动作。扣款 TXN-1C5EC420D16F 当前剩余可退 560 分，但该额度仅在存在计费差错时使用，本案不适用。",
+            "evidence_ids": [
+              "ORD-3895CD44AB32",
+              "SES-A22BB10B77BE",
+              "ATT-820F8F1B83FC",
+              "POLICY-STD-01",
+              "MTR-FCAEFC5A82EF",
+              "MTR-D9D59A50C92D",
+              "TXN-1C5EC420D16F",
+              "TXN-AC0C79644858",
+              "TXN-7846F4E86098"
+            ],
+            "customer_message": "您好，已为您核对本次充电订单。本次充电从 08:30 开始，处于平段计价，共充电 4 度，电费 3.20 元、服务费 2.40 元；充电结束后 10 分钟内即拔枪，未超过 15 分钟免费宽限，未产生闲置费，合计 5.60 元，与您实际扣款金额一致，未发现多扣或重复扣款。启动时冻结的 50 元预授权已在结算时全额解除，不会占用您的余额。关于充电速度较慢的体验问题，计费规则中并无按充电速度减免的条款，因此本次无法办理退款，敬请谅解。如您认为设备存在故障，可提供具体时间与设备信息，我们将协助进一步核查。"
+          }
+        ],
+        "reviews": [
+          {
+            "proposal_id": "PRP-A6F1ADC6919C",
+            "hard_check_passed": true,
+            "approved": true,
+            "issues": []
+          }
+        ],
+        "approval": null,
+        "action_results": [],
+        "failure": null,
+        "customer_message": "您好，已为您核对本次充电订单。本次充电从 08:30 开始，处于平段计价，共充电 4 度，电费 3.20 元、服务费 2.40 元；充电结束后 10 分钟内即拔枪，未超过 15 分钟免费宽限，未产生闲置费，合计 5.60 元，与您实际扣款金额一致，未发现多扣或重复扣款。启动时冻结的 50 元预授权已在结算时全额解除，不会占用您的余额。关于充电速度较慢的体验问题，计费规则中并无按充电速度减免的条款，因此本次无法办理退款，敬请谅解。如您认为设备存在故障，可提供具体时间与设备信息，我们将协助进一步核查。",
+        "simulated_data": true
+      }
+    },
+    {
+      "name": "S9",
+      "design": "C",
+      "mutation": null,
+      "injected": false,
+      "not_injected_reason": null,
+      "passed": true,
+      "errors": [],
+      "correct_outcome": true,
+      "first_correct": true,
+      "first_rejected": false,
+      "revisions": 0,
+      "after_backfill": null,
+      "unauthorized_calls": 0,
+      "llm_calls": 9,
+      "tokens": 22900,
+      "seconds": 14.103,
+      "report": {
+        "case_id": "CASE-47D143C9627C",
+        "run_id": "RUN-193DEBFE43A5",
+        "planner": "deepseek",
+        "status": "explained",
+        "dispute_type": "idle_fee",
+        "chain": [
+          {
+            "attempt_id": "ATT-3E242B298EB4",
+            "session_id": "SES-4C0D7A30E701",
+            "order_id": "ORD-04FC3EE1645D",
+            "txn_ids": [
+              "TXN-B39C701F754D",
+              "TXN-1D5740135524",
+              "TXN-A2152226507C"
+            ]
+          }
+        ],
+        "candidates": [],
+        "facts_summary": {
+          "anomalies": [],
+          "missing_evidence": []
+        },
+        "proposals": [
+          {
+            "proposal_id": "PRP-93A51EA1E20D",
+            "version": 1,
+            "resolution": "explained",
+            "actions": [],
+            "cited_policy_id": "POLICY-STD-01",
+            "rationale": "订单 ORD-04FC3EE1645D 适用 POLICY-STD-01。会话 SES-4C0D7A30E701 于本地时间 2026-11-20 08:30 开始（平段），充电至 01:30Z（本地 09:30）结束，共 4000Wh，按平段 80/60 分每千瓦时计电费 320 分、服务费 240 分。车辆在 02:05Z（本地 10:05）才拔枪，即停止充电后 35 分钟，扣除政策规定的 15 分钟免费宽限后计 20 分钟占位，按每分钟 50 分计 1000 分，未触及 3000 分封顶。重算结果与账单一致：合计 1560 分，已由扣款 TXN-A2152226507C 成功结算，故占位费 1000 分计收正确，无需退款。启动冻结 TXN-B39C701F754D（5000 分）已由 TXN-1D5740135524 解除，无遗留冻结，无需再次处理。当前无待执行资金动作。",
+            "evidence_ids": [
+              "ORD-04FC3EE1645D",
+              "SES-4C0D7A30E701",
+              "POLICY-STD-01",
+              "MTR-7DDE77E4DEB3",
+              "MTR-975EFB370021",
+              "TXN-A2152226507C",
+              "TXN-B39C701F754D",
+              "TXN-1D5740135524"
+            ],
+            "customer_message": "您好，本次占位费 10 元是按规则正常计收的。您的充电在 09:30 结束，但直到 10:05 才拔枪，停止充电后有 15 分钟免费宽限，超出部分共 20 分钟，按每分钟 0.5 元计收 10 元，未超过封顶金额。本次充电电费 3.20 元、服务费 2.40 元，合计 15.60 元，与账单一致。启动时冻结的 50 元已解除，未产生额外扣款，因此本次无需退款。建议今后充电结束后及时拔枪，以免产生占位费。"
+          }
+        ],
+        "reviews": [
+          {
+            "proposal_id": "PRP-93A51EA1E20D",
+            "hard_check_passed": true,
+            "approved": true,
+            "issues": []
+          }
+        ],
+        "approval": null,
+        "action_results": [],
+        "failure": null,
+        "customer_message": "您好，本次占位费 10 元是按规则正常计收的。您的充电在 09:30 结束，但直到 10:05 才拔枪，停止充电后有 15 分钟免费宽限，超出部分共 20 分钟，按每分钟 0.5 元计收 10 元，未超过封顶金额。本次充电电费 3.20 元、服务费 2.40 元，合计 15.60 元，与账单一致。启动时冻结的 50 元已解除，未产生额外扣款，因此本次无需退款。建议今后充电结束后及时拔枪，以免产生占位费。",
+        "simulated_data": true
+      }
+    },
+    {
+      "name": "S10",
+      "design": "C",
+      "mutation": null,
+      "injected": false,
+      "not_injected_reason": null,
+      "passed": true,
+      "errors": [],
+      "correct_outcome": true,
+      "first_correct": true,
+      "first_rejected": false,
+      "revisions": 0,
+      "after_backfill": null,
+      "unauthorized_calls": 0,
+      "llm_calls": 8,
+      "tokens": 21049,
+      "seconds": 15.047,
+      "report": {
+        "case_id": "CASE-E9C1EFE4A8FE",
+        "run_id": "RUN-12967415506A",
+        "planner": "deepseek",
+        "status": "action_executed",
+        "dispute_type": "idle_fee",
+        "chain": [
+          {
+            "attempt_id": "ATT-F0B8FD8C9D5D",
+            "session_id": "SES-1EA9C33896FD",
+            "order_id": "ORD-13FC4FD5BF27",
+            "txn_ids": [
+              "TXN-D8442A3B1053",
+              "TXN-5447205CE180",
+              "TXN-E13916E5F76A",
+              "TXN-72A17D642F4B"
+            ]
+          }
+        ],
+        "candidates": [],
+        "facts_summary": {
+          "anomalies": [
+            {
+              "code": "IDLE_FEE_MISMATCH",
+              "detail": "订单与政策重算不符",
+              "amount_fen": 500,
+              "evidence_ids": [
+                "ORD-13FC4FD5BF27",
+                "POLICY-STD-01"
+              ]
+            }
+          ],
+          "missing_evidence": []
+        },
+        "proposals": [
+          {
+            "proposal_id": "PRP-AD1C252E69F8",
+            "version": 1,
+            "resolution": "action",
+            "actions": [
+              {
+                "action_type": "refund",
+                "target_txn_id": "TXN-5447205CE180",
+                "amount_fen": 500,
+                "reason": "订单重算占位费为 0（停止充电后 10 分钟拔枪，未超 15 分钟免费宽限），原计收 500 分占位费属多收，退还多收部分。"
+              }
+            ],
+            "cited_policy_id": "POLICY-STD-01",
+            "rationale": "订单 ORD-13FC4FD5BF27 按 POLICY-STD-01 重算：会话于本地 2026-11-20 08:30 开始（平段），充电 4000Wh，电费 320 分 + 服务费 240 分 = 560 分；充电结束 01:30Z、拔枪 01:40Z，停止充电后仅 10 分钟即拔枪，未超过政策 idle_grace_minutes=15 的免费宽限，故 idle_minutes=0、idle_fee_fen=0。原订单却计收占位费 500 分，总收 1060 分，属 IDLE_FEE_MISMATCH 多收。扣款 TXN-5447205CE180 成功扣 1060 分，当前剩余可退 1060 分，无在途退款，故应退多收的 500 分。启动冻结 TXN-D8442A3B1053（5000 分）已由 TXN-E13916E5F76A 解除，无需再处理。",
+            "evidence_ids": [
+              "ORD-13FC4FD5BF27",
+              "POLICY-STD-01",
+              "SES-1EA9C33896FD",
+              "MTR-06277AD42EF4",
+              "MTR-007EACB2CA3B",
+              "TXN-5447205CE180",
+              "TXN-D8442A3B1053",
+              "TXN-E13916E5F76A"
+            ],
+            "customer_message": "您好，经核对：本次充电于 08:30 开始，充电结束后约 10 分钟您就拔枪了，未超过 15 分钟的免费宽限时间，因此不应收取占位费。原账单中多计的 500 分（5 元）占位费已提交退款申请，退款将退回您的钱包余额，具体到账时间以钱包记录为准，该笔退款需人工审批后执行。启动时冻结的 5000 分已随结算解除，无需另行处理。感谢您的反馈。"
+          }
+        ],
+        "reviews": [
+          {
+            "proposal_id": "PRP-AD1C252E69F8",
+            "hard_check_passed": true,
+            "approved": true,
+            "issues": []
+          }
+        ],
+        "approval": {
+          "decision": "approve",
+          "approver": "evaluation",
+          "modified_actions": null,
+          "comment": null
+        },
+        "action_results": [
+          {
+            "action_id": "ACT-A5619FB9B4C1",
+            "action_type": "refund",
+            "target_txn_id": "TXN-5447205CE180",
+            "amount_fen": 500,
+            "result_txn_id": "TXN-72A17D642F4B",
+            "status": "succeeded",
+            "reject_reason": null
+          }
+        ],
+        "failure": null,
+        "customer_message": "审批已通过，资金处理已完成，可查看钱包流水。",
+        "simulated_data": true
+      }
+    },
+    {
+      "name": "S11",
+      "design": "C",
+      "mutation": null,
+      "injected": false,
+      "not_injected_reason": null,
+      "passed": true,
+      "errors": [],
+      "correct_outcome": true,
+      "first_correct": false,
+      "first_rejected": false,
+      "revisions": 0,
+      "after_backfill": null,
+      "unauthorized_calls": 0,
+      "llm_calls": 2,
+      "tokens": 2473,
+      "seconds": 3.377,
+      "report": {
+        "case_id": "CASE-2314A4271137",
+        "run_id": "RUN-442DB035F0E6",
+        "planner": "deepseek",
+        "status": "clarify",
+        "dispute_type": "wrong_tariff",
+        "chain": [],
+        "candidates": [
+          {
+            "订单尾号": "0FFA",
+            "桩号": "CP-A01",
+            "本地时间": "2026-11-20T14:00:00+08:00"
+          },
+          {
+            "订单尾号": "FA77",
+            "桩号": "CP-A01",
+            "本地时间": "2026-11-20T08:30:00+08:00"
+          }
+        ],
+        "facts_summary": {},
+        "proposals": [],
+        "reviews": [],
+        "approval": null,
+        "action_results": [],
+        "failure": null,
+        "customer_message": "请提供完整订单号，或确认充电桩和启动时间。",
+        "simulated_data": true
+      }
+    }
+  ]
+}

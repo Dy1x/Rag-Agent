@@ -2,58 +2,43 @@ import time
 import uuid
 
 import streamlit as st
+from sqlalchemy.exc import SQLAlchemyError
+from service.billing.db import get_billing_engine
+from service.billing.simulator_service import SimulatorService
 
 from agent.react_agent import ReactAgent
 from utils.memory_handler import AgentMemory
 
 
-def get_url_session_id() -> str:
+def read_query_param(name: str) -> str | None:
     """
-    从URL读取session_id。
-
-    如果URL中没有session_id，则生成新的并写入URL。
+    安全读取 URL 查询参数，兼容列表返回值。
     """
 
-    query_session_id = st.query_params.get(
-        "session_id"
-    )
-
-    # 兼容可能返回列表的情况。
-    if isinstance(query_session_id, list):
-        query_session_id = (
-            query_session_id[-1]
-            if query_session_id
-            else None
-        )
-
-    if query_session_id:
-        query_session_id = str(
-            query_session_id
-        ).strip()
-
-    if query_session_id:
-        return query_session_id
-
-    new_session_id = str(uuid.uuid4())
-
-    st.query_params["session_id"] = (
-        new_session_id
-    )
-
-    return new_session_id
+    value = st.query_params.get(name)
+    if isinstance(value, list):
+        value = value[-1] if value else None
+    if value is None:
+        return None
+    text = str(value).strip()
+    return text or None
 
 
-def create_new_session() -> None:
+def create_new_session(driver_key: str | None = None) -> None:
     """
-    创建全新的页面会话。
+    为当前车主创建全新的页面会话。
     """
 
     new_session_id = str(uuid.uuid4())
+    key = driver_key or st.session_state.get("customer_id") or "__default__"
+    driver_sessions = st.session_state.setdefault("driver_sessions", {})
+    driver_sessions[key] = new_session_id
 
     st.session_state["session_id"] = (
         new_session_id
     )
 
+    st.session_state.pop("agent_thread_id", None)
     st.session_state.pop("agent", None)
     st.session_state.pop("message", None)
 
@@ -64,21 +49,60 @@ def create_new_session() -> None:
     st.rerun()
 
 
-st.title("机器人智能客服")
+st.title("新能源充电桩智能客服")
 st.divider()
 
 
-url_session_id = get_url_session_id()
-
-
-# URL中的session_id发生变化时，切换当前会话。
-if (
-    st.session_state.get("session_id")
-    != url_session_id
-):
-    st.session_state["session_id"] = (
-        url_session_id
+try:
+    drivers = {c.customer_id: c.nickname for c in SimulatorService(get_billing_engine()).list_customers()}
+except SQLAlchemyError:
+    drivers = {}
+    st.sidebar.info("费用核查暂不可用，请检查 MySQL 并运行计费库初始化。")
+previous_driver = st.session_state.get("customer_id")
+if drivers:
+    driver_ids = list(drivers)
+    if st.session_state.get("chat_driver") not in drivers:
+        st.session_state.pop("chat_driver", None)
+    requested_driver = read_query_param("customer_id") or previous_driver
+    selected_driver = st.sidebar.selectbox(
+        "当前车主", driver_ids,
+        index=driver_ids.index(requested_driver) if requested_driver in drivers else 0,
+        format_func=drivers.get, key="chat_driver",
     )
+    st.query_params["customer_id"] = selected_driver
+else:
+    selected_driver = None
+st.session_state["customer_id"] = selected_driver
+
+driver_key = selected_driver or "__default__"
+driver_sessions = st.session_state.setdefault("driver_sessions", {})
+driver_changed = previous_driver is not None and previous_driver != selected_driver
+
+if driver_changed:
+    active_session_id = driver_sessions.get(driver_key) or str(uuid.uuid4())
+else:
+    active_session_id = (
+        read_query_param("session_id")
+        or driver_sessions.get(driver_key)
+        or str(uuid.uuid4())
+    )
+
+driver_sessions[driver_key] = active_session_id
+st.query_params["session_id"] = active_session_id
+
+target_thread_id = (
+    f"{active_session_id}:{selected_driver}"
+    if selected_driver
+    else active_session_id
+)
+
+# 会话 ID 或当前车主发生变化时，切换对应车主的 Agent 与历史记录。
+if (
+    st.session_state.get("session_id") != active_session_id
+    or st.session_state.get("agent_thread_id") != target_thread_id
+):
+    st.session_state["session_id"] = active_session_id
+    st.session_state["agent_thread_id"] = target_thread_id
 
     st.session_state.pop("agent", None)
     st.session_state.pop("message", None)
@@ -86,9 +110,7 @@ if (
 
 if "agent" not in st.session_state:
     st.session_state["agent"] = ReactAgent(
-        session_id=st.session_state[
-            "session_id"
-        ]
+        session_id=target_thread_id
     )
 
 
@@ -133,9 +155,7 @@ with st.sidebar:
 
             # 清除user_id、city、month等结构化记忆。
             memory.clear_memory(
-                st.session_state[
-                    "session_id"
-                ]
+                    st.session_state["agent"].session_id
             )
 
             # 清除页面展示消息。
@@ -192,7 +212,7 @@ if prompt:
             response_generator = (
                 st.session_state[
                     "agent"
-                ].execute_stream(prompt)
+                ].execute_stream(prompt, customer_id=selected_driver)
             )
 
             st.chat_message(

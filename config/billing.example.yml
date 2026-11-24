@@ -1,0 +1,8 @@
+mysql_database: charging_billing
+local_timezone: Asia/Shanghai
+planner: offline
+max_revisions: 2
+maker_max_tool_calls: 3
+checker_max_tool_calls: 8
+checkpoint_sqlite_path: data/checkpoints/billing_cases.sqlite
+default_operator: ops-admin

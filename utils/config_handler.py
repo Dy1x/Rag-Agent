@@ -3,6 +3,7 @@ yaml
 """
 
 import yaml
+from pathlib import Path
 from utils.path_tool import get_abs_path
 
 
@@ -91,3 +92,13 @@ semantic_cache_conf = load_semantic_cache_config()
 celery_conf = load_celery_config()
 document_parser_conf = load_document_parser_config()
 retrieval_conf = load_retrieval_config()
+
+
+def load_billing_config() -> dict:
+    path = Path(get_abs_path("config/billing.yml"))
+    if not path.exists():
+        path = path.with_name("billing.example.yml")
+    return yaml.safe_load(path.read_text(encoding="utf-8"))
+
+
+billing_conf = load_billing_config()

@@ -15,6 +15,7 @@ from agent.tools.agent_tools import (
     rag_summerize,
     save_memory_context,
 )
+from agent.tools.case_tools import case_tools
 from agent.tools.middleware import (
     initialize_rag_budget,
     log_before_model,
@@ -70,6 +71,7 @@ class ReactAgent:
             ),
             tools=[
                 rag_summerize,
+                *case_tools(),
                 get_memory_context,
                 save_memory_context,
                 clear_memory_context,
@@ -101,6 +103,7 @@ class ReactAgent:
     def execute_stream(
         self,
         query: str,
+        customer_id: str | None = None,
     ) -> Iterator[str]:
         """
         流式执行Agent。
@@ -133,6 +136,7 @@ class ReactAgent:
         }
 
         runtime_context = {
+            "customer_id": customer_id,
             "session_id": self.session_id,
         }
 

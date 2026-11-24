@@ -1,0 +1,72 @@
+{
+  "S1": {
+    "status": "action_executed",
+    "actions": [
+      {
+        "action_type": "unfreeze",
+        "target": "refs.first_freeze",
+        "amount_fen": 5000
+      }
+    ]
+  },
+  "S2": {
+    "status": "action_executed",
+    "actions": [
+      {
+        "action_type": "refund",
+        "target": "refs.second_deduct",
+        "amount_fen": 560
+      }
+    ]
+  },
+  "S3": {
+    "status": "pending_evidence",
+    "actions": []
+  },
+  "S4": {
+    "status": "action_executed",
+    "actions": [
+      {
+        "action_type": "refund",
+        "target": "refs.first_deduct",
+        "amount_fen": 240
+      }
+    ]
+  },
+  "S5": {
+    "status": "explained",
+    "actions": []
+  },
+  "S6": {
+    "status": "pending_evidence",
+    "actions": [],
+    "after_backfill": "explained"
+  },
+  "S7": {
+    "status": "forbidden",
+    "actions": []
+  },
+  "S8": {
+    "status": "explained",
+    "actions": []
+  },
+  "S9": {
+    "status": "explained",
+    "actions": []
+  },
+  "S10": {
+    "status": "action_executed",
+    "actions": [
+      {
+        "action_type": "refund",
+        "target": "refs.first_deduct",
+        "amount_fen": 500
+      }
+    ]
+  },
+  "S11": {
+    "status": "clarify",
+    "actions": [],
+    "candidate_count": 2
+  }
+}
