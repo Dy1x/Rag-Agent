@@ -1,8 +1,10 @@
 from langchain.tools import ToolRuntime, tool
+from langchain_core.messages import HumanMessage, ToolMessage
 
 from agent.cases.registry import additional_handlers, get_handler
 from service.billing.errors import BillingError
 from service.billing.models import Identity
+from service.memory.compactor import tool_payload
 from utils.config_handler import billing_conf
 
 
@@ -10,11 +12,33 @@ def _context(runtime):
     return runtime.context or {} if runtime else {}
 
 
+def _billing_question(question, runtime):
+    # In chat, pass the user's own words, never the outer model's rewrite.
+    messages = (getattr(runtime, "state", None) or {}).get("messages", [])
+    turns = [i for i, msg in enumerate(messages) if isinstance(msg, HumanMessage)]
+    if not turns or not isinstance(messages[turns[-1]].content, str):
+        return question
+    latest = messages[turns[-1]].content
+    if len(turns) < 2:
+        return latest
+    previous = messages[turns[-2]:turns[-1]]
+    dispute = next((
+        msg for msg in reversed(previous)
+        if isinstance(msg, ToolMessage) and msg.name == "handle_billing_dispute"
+    ), None)
+    if dispute and tool_payload(dispute.content).get("status") == "clarify":
+        if isinstance(previous[0].content, str):
+            return f"{previous[0].content}\n{latest}"
+    return latest
+
+
 def _start(handler, question, locator, runtime):
     context = _context(runtime)
     if not context.get("customer_id"):
         return {"status": "need_login"}
     try:
+        # Only the authenticated identity, session reference and scoped tool
+        # arguments cross into the case handler. Memory stays in the chat graph.
         result = handler.start(
             Identity(role="customer", actor_id=context["customer_id"]),
             question,
@@ -62,7 +86,7 @@ def handle_billing_dispute(
             "status": "clarify",
             "clarification_question": "请提供 ISO 格式的本地日期时间。",
         }
-    return _start(get_handler("billing_dispute"), question, locator, runtime)
+    return _start(get_handler("billing_dispute"), _billing_question(question, runtime), locator, runtime)
 
 
 @tool

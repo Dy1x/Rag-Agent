@@ -13,6 +13,7 @@ from test_investigation_chat import ToolCallingModel, request_tool
 from agent.react_agent import ReactAgent
 from agent.cases.billing.handler import BillingDisputeHandler
 from agent.tools.case_tools import handle_billing_dispute, get_dispute_case_status
+from agent.tools.memory_tools import CUSTOMER_MEMORY_TOOLS
 from service.billing.models import Identity
 from service.billing.scenarios import build_scenario
 from service.billing.simulator_service import SimulatorService
@@ -28,6 +29,7 @@ class ChatSchemaTests(unittest.TestCase):
             "get_memory_context",
             "save_memory_context",
             "clear_memory_context",
+            *(tool.name for tool in CUSTOMER_MEMORY_TOOLS),
         }
         extra = SimpleNamespace(
             name="charger_service_case", description="充电桩维修案件"
@@ -47,7 +49,7 @@ class ChatSchemaTests(unittest.TestCase):
                 self.assertCountEqual(names, expected | {h.name for h in handlers})
 
     def test_identity_is_runtime_only(self):
-        for t in [handle_billing_dispute, get_dispute_case_status]:
+        for t in [handle_billing_dispute, get_dispute_case_status, *CUSTOMER_MEMORY_TOOLS]:
             self.assertNotIn(
                 "runtime", t.tool_call_schema.model_json_schema()["properties"]
             )

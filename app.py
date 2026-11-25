@@ -4,9 +4,14 @@ import uuid
 import streamlit as st
 from sqlalchemy.exc import SQLAlchemyError
 from service.billing.db import get_billing_engine
+from service.billing.errors import BillingError
+from service.billing.models import Identity
 from service.billing.simulator_service import SimulatorService
+from service.memory.customer_memory_service import CustomerMemoryService
+from service.memory.summary_store import get_summary_store
 
 from agent.react_agent import ReactAgent
+from utils.config_handler import memory_conf
 from utils.memory_handler import AgentMemory
 
 
@@ -47,6 +52,46 @@ def create_new_session(driver_key: str | None = None) -> None:
     )
 
     st.rerun()
+
+
+def render_memory_view(thread_id: str, customer_id: str | None) -> None:
+    with st.expander("记忆视图（L1 / L2）", expanded=False):
+        st.markdown("**L1 当前会话摘要**")
+        summary = get_summary_store().get(thread_id)
+        if summary:
+            st.caption(f"已压缩 {summary.evicted_rounds} 轮")
+            st.text(summary.render(memory_conf["max_summary_chars"]))
+        else:
+            st.caption("对话较短，尚未触发滚动压缩")
+
+        st.markdown("**L2 当前车主长期记忆**")
+        if not customer_id or not memory_conf["enable_long_term_memory"]:
+            st.caption("请选择车主查看长期记忆" if not customer_id else "长期记忆已关闭")
+            return
+
+        identity = Identity(role="customer", actor_id=customer_id)
+        try:
+            service = CustomerMemoryService(get_billing_engine())
+            records = service.list_active(identity, limit=None)
+            audits = service.list_audit_logs(identity, limit=5)
+            if not records:
+                st.caption("当前车主没有活跃记忆")
+            for record in records:
+                st.text(
+                    f"[{record.category}] {record.memory_key}\n{record.memory_value}\n"
+                    f"版本 {record.version} · {record.updated_at:%Y-%m-%d %H:%M} UTC"
+                )
+                if st.button("遗忘", key=f"forget-{record.memory_id}"):
+                    service.delete_memory(
+                        identity, memory_key=record.memory_key, reason="memory_view",
+                    )
+                    st.rerun()
+            with st.expander("最近五条记忆变更"):
+                for entry in audits:
+                    old, new = entry.old_value or "空", entry.new_value or "空"
+                    st.text(f"{entry.memory_key} · {entry.action} · {old} → {new}")
+        except (SQLAlchemyError, BillingError):
+            st.info("长期记忆暂不可用")
 
 
 st.title("新能源充电桩智能客服")
@@ -168,6 +213,8 @@ with st.sidebar:
                 f"清空当前会话失败：{error}"
             )
 
+    render_memory_view(target_thread_id, selected_driver)
+
 
 for message in st.session_state["message"]:
     st.chat_message(
@@ -268,3 +315,5 @@ if prompt:
                 "content": error_message,
             }
         )
+
+    st.rerun()

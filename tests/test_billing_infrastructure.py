@@ -27,7 +27,16 @@ class InfrastructureTests(MysqlCase):
         with self.engine.connect() as conn:
             self.assertEqual(conn.scalar(text("SELECT COUNT(*) FROM cb_customers")), 3)
         subprocess.run(command + ["--reset"], check=True)
-        self.assertEqual(len(inspect(self.engine).get_table_names()), 17)
+        inspector = inspect(self.engine)
+        self.assertEqual(len(inspector.get_table_names()), 19)
+        self.assertEqual(
+            {index["name"] for index in inspector.get_indexes("cb_customer_memories")},
+            {"uk_customer_key", "idx_mem_customer_active"},
+        )
+        self.assertEqual(
+            {index["name"] for index in inspector.get_indexes("cb_memory_audit_logs")},
+            {"idx_audit_customer", "idx_audit_memory"},
+        )
         with self.engine.connect() as conn:
             for table, count in [
                 ("customers", 2),
@@ -35,6 +44,8 @@ class InfrastructureTests(MysqlCase):
                 ("chargers", 3),
                 ("tariff_periods", 6),
                 ("tariff_policies", 1),
+                ("customer_memories", 0),
+                ("memory_audit_logs", 0),
             ]:
                 self.assertEqual(
                     conn.scalar(text(f"SELECT COUNT(*) FROM cb_{table}")), count

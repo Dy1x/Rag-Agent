@@ -209,3 +209,35 @@ CREATE TABLE IF NOT EXISTS cb_trace_events (
   created_at  DATETIME(3)  NOT NULL,
   UNIQUE KEY uk_run_seq (run_id, seq)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS cb_customer_memories (
+  memory_id         VARCHAR(32)  NOT NULL PRIMARY KEY,
+  customer_id       VARCHAR(32)  NOT NULL,
+  category          ENUM('profile','vehicle','station','preference','case_summary') NOT NULL,
+  memory_key        VARCHAR(64)  NOT NULL,
+  memory_value      VARCHAR(500) NOT NULL,
+  source            ENUM('user_explicit','case_auto') NOT NULL,
+  source_session_id VARCHAR(96)  NULL,
+  version           INT          NOT NULL DEFAULT 1,
+  status            ENUM('active','deleted') NOT NULL DEFAULT 'active',
+  expires_at        DATETIME(3)  NULL,
+  created_at        DATETIME(3)  NOT NULL,
+  updated_at        DATETIME(3)  NOT NULL,
+  UNIQUE KEY uk_customer_key (customer_id, memory_key),
+  INDEX idx_mem_customer_active (customer_id, status, updated_at),
+  CONSTRAINT fk_mem_customer FOREIGN KEY (customer_id) REFERENCES cb_customers(customer_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS cb_memory_audit_logs (
+  audit_id      VARCHAR(32)  NOT NULL PRIMARY KEY,
+  memory_id     VARCHAR(32)  NOT NULL,
+  customer_id   VARCHAR(32)  NOT NULL,
+  memory_key    VARCHAR(64)  NOT NULL,
+  action        ENUM('create','update','delete','restore') NOT NULL,
+  old_value     VARCHAR(500) NULL,
+  new_value     VARCHAR(500) NULL,
+  reason        VARCHAR(128) NULL,
+  created_at    DATETIME(3)  NOT NULL,
+  INDEX idx_audit_customer (customer_id, created_at),
+  INDEX idx_audit_memory (memory_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

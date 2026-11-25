@@ -102,3 +102,14 @@ def load_billing_config() -> dict:
 
 
 billing_conf = load_billing_config()
+
+
+def load_memory_config() -> dict:
+    path = Path(get_abs_path("config/memory.yml"))
+    defaults = yaml.safe_load(path.with_name("memory.example.yml").read_text(encoding="utf-8"))
+    if path.exists():
+        defaults.update(yaml.safe_load(path.read_text(encoding="utf-8")) or {})
+    return defaults
+
+
+memory_conf = load_memory_config()

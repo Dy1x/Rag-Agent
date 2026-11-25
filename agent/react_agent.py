@@ -17,17 +17,18 @@ from agent.tools.agent_tools import (
 )
 from agent.tools.investigation_tools import investigate_outage
 from agent.tools.case_tools import case_tools
+from agent.tools.memory_tools import CUSTOMER_MEMORY_TOOLS
 from agent.tools.middleware import (
+    compact_and_summarize_history,
     initialize_rag_budget,
+    inject_memory_prompt,
     log_before_model,
     monitor_tool,
-    trim_conversation_history,
 )
 from model.factory import get_chat_model
+from service.memory.summary_store import get_summary_store
 from utils.chat_checkpointer import get_chat_checkpointer
-from utils.prompt_loader import (
-    load_system_prompts,
-)
+from utils.config_handler import memory_conf
 from utils.session_context import (
     reset_current_session_id,
     set_current_session_id,
@@ -67,9 +68,6 @@ class ReactAgent:
         self.checkpointer = get_chat_checkpointer()
         self.agent = create_agent(
             model=model,
-            system_prompt=(
-                load_system_prompts()
-            ),
             tools=[
                 rag_summerize,
                 investigate_outage,
@@ -77,11 +75,12 @@ class ReactAgent:
                 get_memory_context,
                 save_memory_context,
                 clear_memory_context,
+                *(CUSTOMER_MEMORY_TOOLS if memory_conf["enable_long_term_memory"] else []),
             ],
             middleware=[
                 initialize_rag_budget,
-                # 先裁剪，再记录裁剪后的消息数量
-                trim_conversation_history,
+                compact_and_summarize_history,
+                inject_memory_prompt,
                 monitor_tool,
                 log_before_model,
             ],
@@ -309,6 +308,7 @@ class ReactAgent:
         self.checkpointer.delete_thread(
             self.session_id
         )
+        get_summary_store().clear(self.session_id)
 
     def clear_conversation_memory(
         self,

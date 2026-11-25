@@ -32,6 +32,7 @@ logs/
 config/cache.yml
 config/db.yml
 config/billing.yml
+config/memory.yml
 data/checkpoints/
 config/celery.yml
 
@@ -57,6 +58,10 @@ eval/reports/*
 !eval/reports/billing-compare-deepseek-8513d5f7.md
 !eval/reports/billing-s1-targeted-deepseek-e2660e46.json
 !eval/reports/RUN-2063FFF854CC.otlp.pb
+!eval/reports/memory-compare-offline-d777f56d.md
+!eval/reports/memory-compare-offline-d777f56d.json
+!eval/reports/memory-compare-deepseek-e86becec.md
+!eval/reports/memory-compare-deepseek-e86becec.json
 data_legacy_robot/
 
 # 临时文件

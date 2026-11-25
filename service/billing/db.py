@@ -124,6 +124,7 @@ def apply_schema(engine: Engine) -> None:
 
 
 def reset_business_data(engine: Engine) -> None:
+    # Reverse schema order so memory records are cleared before their customers.
     tables = re.findall(r"CREATE TABLE IF NOT EXISTS (cb_[a-z_]+)", _schema())
     with engine.begin() as conn:
         for table in reversed(tables):

@@ -1,0 +1,15 @@
+# L1 上下文工程
+recent_rounds: 6
+summary_trigger_rounds: 6
+max_context_chars: 16000
+compact_keep_tool_rounds: 2
+tool_compact_chars: 600
+max_summary_chars: 800
+summarizer_mode: offline
+summary_ttl_seconds: 7200
+
+# L2 车主长期记忆
+enable_long_term_memory: true
+max_injected_memories: 10
+auto_record_case_summary: true
+case_summary_retention_days: 90

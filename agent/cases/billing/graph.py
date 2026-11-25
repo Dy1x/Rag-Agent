@@ -15,7 +15,8 @@ from service.billing.models import (
     Proposal,
     ReviewVerdict,
 )
-from utils.config_handler import billing_conf
+from service.memory.customer_memory_service import CustomerMemoryService
+from utils.config_handler import billing_conf, memory_conf
 from utils.logger_handler import logger
 from . import checker, intake, maker
 from .offline import RELEVANT, customer_message_issues, offline_maker, offline_soft
@@ -375,6 +376,22 @@ def build_graph(service, store, executor, checkpointer, *, transform=None, desig
             simulated_data=True,
         )
         store.finish_run(s["run_id"], status, report)
+        if (
+            memory_conf["enable_long_term_memory"]
+            and memory_conf["auto_record_case_summary"]
+            and status in {"explained", "action_executed", "action_rejected", "escalated"}
+        ):
+            try:
+                CustomerMemoryService(store.engine).upsert_memory(
+                    Identity(**s["identity"]),
+                    memory_key=f"case:{s['case_id']}",
+                    memory_value=f"{report['dispute_type'] or 'billing'} | 状态:{status}",
+                    source="case_auto",
+                    ttl_days=memory_conf["case_summary_retention_days"],
+                    reason="billing_case_finalized",
+                )
+            except Exception as error:
+                logger.warning(f"[memory] 案件摘要写入失败：{type(error).__name__}")
         logger.info(
             "billing case_id=%s run_id=%s status=%s", s["case_id"], s["run_id"], status
         )
